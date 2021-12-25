@@ -26,13 +26,18 @@ RSpec.describe "DSL => Complete" do
         m "<CTRL-c>", ":Git Blame"
         m "<CTRL-c>", ":Git Blame"
       end
+
+      globals do
+        set :configuration
+      end
     end
     managers = NvimConf.managers
-    expect(managers.length).to eq(5)
+    expect(managers.length).to eq(6)
     expect(managers[0].class).to eq(NvimConf::Managers::Plugins)
     expect(managers[1].class).to eq(NvimConf::Mappings::Manager)
     expect(managers[2].class).to eq(NvimConf::Settings::Manager)
     expect(managers[3].class).to eq(NvimConf::CompilerConfigurations::Manager)
     expect(managers[4].class).to eq(NvimConf::Mappings::Manager)
+    expect(managers[5].class).to eq(NvimConf::Managers::Globals)
   end
 end

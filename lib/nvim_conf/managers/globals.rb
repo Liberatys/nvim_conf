@@ -1,3 +1,5 @@
+require "nvim_conf/models/global"
+
 module NvimConf
   module Managers
     class Globals
@@ -5,10 +7,31 @@ module NvimConf
         @globals = []
       end
 
-      def set
+      def set(name, value = true)
+        store_global(
+          name,
+          value
+        )
       end
 
-      def unset
+      def store?
+        @globals.any?
+      end
+
+      def unset(name)
+        store_global(
+          name,
+          false
+        )
+      end
+
+      private
+
+      def store_global(name, value)
+        @globals << Models::Global.new(
+          name,
+          value
+        )
       end
     end
   end
