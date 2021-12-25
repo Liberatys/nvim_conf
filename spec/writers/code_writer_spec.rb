@@ -47,6 +47,7 @@ RSpec.describe NvimConf::Writers::Code::Orchestrator do
             end
 
             return require('packer').startup(function()
+
               use 'wbthomason/packer.nvim'
               use 'andymass/vim-matchup'
 

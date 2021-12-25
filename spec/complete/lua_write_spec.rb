@@ -8,7 +8,6 @@ RSpec.describe "Complete Write => Lua" do
       settings do
         set "tabstop"
       end
-
       mappings do
         nmap "<CTRL-c>", ":Git Blame"
       end
@@ -72,6 +71,7 @@ RSpec.describe "Complete Write => Lua" do
       end
 
       return require('packer').startup(function()
+
         {use 'glacambre/firenvim', opt = true, run = 'cd folder'}
         {use 'glepnir/galaxyline.nvim', opt = true, branch = 'main'}
 
