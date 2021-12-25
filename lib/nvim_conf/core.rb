@@ -9,40 +9,45 @@ module NvimConf
     end
 
     def plugins(name, bootstraped: false, &block)
-      store_manager(
-        evaluate_for_manager(
-          Plugins::Manager.new(name, bootstraped: bootstraped),
-          &block
-        )
+      evaluate_for_manager(
+        Managers::Plugins.new(name, bootstraped: bootstraped),
+        &block
+      )
+    end
+
+    def globals(&block)
+      evaluate_for_manager(
+        Managers::Globals.new,
+        &block
       )
     end
 
     def settings(&block)
-      store_manager(evaluate_for_manager(
-        Settings::Manager.new,
+      evaluate_for_manager(
+        Managers::Settings.new,
         &block
-      ))
+      )
     end
 
     def mappings(namespace = nil, &block)
-      store_manager(evaluate_for_manager(
-        Mappings::Manager.new(namespace),
+      evaluate_for_manager(
+        Managers::Mappings.new(namespace),
         &block
-      ))
+      )
     end
 
     def configuration(&block)
-      store_manager(evaluate_for_manager(
-        CompilerConfigurations::Manager.new,
+      evaluate_for_manager(
+        Managers::CompilerConfigurations.new,
         &block
-      ))
+      )
     end
 
     private
 
     def evaluate_for_manager(manager, &block)
       manager.instance_eval(&block)
-      manager
+      store_manager(manager)
     end
 
     def store_manager(manager)

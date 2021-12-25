@@ -1,8 +1,9 @@
-require "nvim_conf/mappings/mapping"
+require "nvim_conf/models/mapping"
+
 # TODO: Refactor error messages
 module NvimConf
-  module Mappings
-    class Manager
+  module Managers
+    class Mappings
       AVAILABLE_METHODS = %w[map map! nmap vmap imap cmap smap xmap omap lmap]
       attr_reader :mappings
 
@@ -57,7 +58,7 @@ module NvimConf
       end
 
       def build_mapping(operator, binding, action)
-        Mapping.new(operator, binding, action)
+        Models::Mapping.new(operator, binding, action)
       end
     end
   end

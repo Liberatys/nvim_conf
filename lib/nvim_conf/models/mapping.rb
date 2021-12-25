@@ -1,7 +1,7 @@
 require "dry-initializer"
 
 module NvimConf
-  module Mappings
+  module Models
     class Mapping
       extend Dry::Initializer
 

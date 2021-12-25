@@ -1,13 +1,11 @@
-require "nvim_conf/generators/code/mappings/lua"
-require "nvim_conf/generators/code/mappings/vim"
+require "nvim_conf/generators/code/globals/lua"
 
 module NvimConf
   module Writers
     module Code
-      class MappingsWriter
-        MAPPING_GENERATOR_MAPPING = {
-          lua: Generators::Mappings::Code::Lua,
-          vim: Generators::Mappings::Code::Vim
+      class GlobalsWriter
+        GLOBAL_GENERATOR_MAPPING = {
+          lua: Generators::Globals::Code::Lua
         }
 
         def initialize(manager, io, format: :lua, commented: false)
@@ -17,10 +15,10 @@ module NvimConf
         end
 
         def write
-          @manager.mappings.each do |mapping|
+          @manager.globals.each do |global|
             @io.write(
               [
-                generator_class.new(mapping).generate,
+                generator_class.new(global).generate,
                 "\n"
               ].join
             )
@@ -30,7 +28,7 @@ module NvimConf
         private
 
         def generator_class
-          MAPPING_GENERATOR_MAPPING[@format]
+          GLOBAL_GENERATOR_MAPPING[@format]
         end
       end
     end

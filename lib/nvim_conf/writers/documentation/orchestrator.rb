@@ -1,4 +1,5 @@
 require "nvim_conf/writers/documentation/mappings"
+require "nvim_conf/writers/documentation/globals"
 require "nvim_conf/writers/documentation/settings"
 require "nvim_conf/writers/documentation/plugins"
 
@@ -6,7 +7,7 @@ module NvimConf
   module Writers
     module Documentation
       class Orchestrator
-        NON_WRITABLE_MANAGER = NvimConf::CompilerConfigurations::Manager
+        NON_WRITABLE_MANAGER = NvimConf::Managers::CompilerConfigurations
 
         def initialize(managers, io, configuration = nil)
           @managers = managers
@@ -21,20 +22,27 @@ module NvimConf
 
           writers = [
             [
-              NvimConf::Writers::Documentation::Settings, NvimConf::Settings::Manager
+              NvimConf::Writers::Documentation::Settings, NvimConf::Managers::Settings
             ],
             [
-              NvimConf::Writers::Documentation::Mappings, NvimConf::Mappings::Manager
+              NvimConf::Writers::Documentation::Mappings, NvimConf::Managers::Mappings
             ],
             [
-              NvimConf::Writers::Documentation::Plugins, NvimConf::Plugins::Manager
+              NvimConf::Writers::Documentation::Plugins, NvimConf::Managers::Plugins
+            ],
+            [
+              NvimConf::Writers::Documentation::Globals, NvimConf::Managers::Globals
             ]
           ]
 
           writers.each_with_index do |relevant_classes, index|
             writer_class, manager_class = *relevant_classes
+            managers = @managers.select { |manager| manager.instance_of?(manager_class) }
+
+            next if managers.length.zero?
+
             writer_class.new(
-              @managers.select { |manager| manager.instance_of?(manager_class) },
+              managers,
               @io
             ).aggregate_writes
 

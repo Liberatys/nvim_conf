@@ -1,8 +1,8 @@
-require "nvim_conf/compiler_configurations/compiler_configuration"
+require "nvim_conf/models/compiler_configuration"
 
 module NvimConf
-  module CompilerConfigurations
-    class Manager
+  module Managers
+    class CompilerConfigurations
       attr_reader :configurations
 
       def initialize
@@ -64,7 +64,7 @@ module NvimConf
       end
 
       def build_configuration(name, value)
-        CompilerConfiguration.new(
+        Models::CompilerConfiguration.new(
           name,
           value
         )

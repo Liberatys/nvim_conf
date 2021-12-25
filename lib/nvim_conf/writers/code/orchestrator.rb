@@ -1,4 +1,5 @@
 require "nvim_conf/writers/code/settings"
+require "nvim_conf/writers/code/globals"
 require "nvim_conf/writers/code/mappings"
 require "nvim_conf/writers/code/plugins/handler"
 
@@ -6,12 +7,13 @@ module NvimConf
   module Writers
     module Code
       class Orchestrator
-        NON_WRITABLE_MANAGER = NvimConf::CompilerConfigurations::Manager
+        NON_WRITABLE_MANAGER = NvimConf::Managers::CompilerConfigurations
 
         WRITER_CONFIGURATION = {
-          NvimConf::Settings::Manager => SettingsWriter,
-          NvimConf::Mappings::Manager => MappingsWriter,
-          NvimConf::Plugins::Manager => Plugins::Handler
+          NvimConf::Managers::Settings => SettingsWriter,
+          NvimConf::Managers::Mappings => MappingsWriter,
+          NvimConf::Managers::Plugins => Code::Plugins::Handler,
+          NvimConf::Managers::Globals => GlobalsWriter
         }
 
         def initialize(managers, io, configuration = nil)
@@ -35,6 +37,7 @@ module NvimConf
                 separator
               )
             end
+
             aggregate_writes_for_manager(manager)
           end
         end

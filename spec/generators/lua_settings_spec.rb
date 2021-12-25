@@ -1,7 +1,9 @@
 RSpec.describe NvimConf::Generators::Settings::Code::Lua do
+  let(:model_class) { NvimConf::Models::Setting }
+
   describe ".generate" do
     let(:setting) do
-      NvimConf::Settings::Setting.new(
+      model_class.new(
         :set,
         :tabstop,
         4
@@ -17,7 +19,7 @@ RSpec.describe NvimConf::Generators::Settings::Code::Lua do
 
     context "when setting requires quotes surrounding value" do
       let(:setting) do
-        NvimConf::Settings::Setting.new(
+        model_class.new(
           :set,
           :tabstop,
           "4"

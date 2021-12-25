@@ -1,4 +1,6 @@
 RSpec.describe NvimConf::Generators::Mappings::Code::Lua do
+  let(:model_class) { NvimConf::Models::Mapping }
+
   describe "#generate" do
     {
       map: "",
@@ -7,7 +9,7 @@ RSpec.describe NvimConf::Generators::Mappings::Code::Lua do
     }.each do |map_method, shorthand|
       context "when method is #{map_method}" do
         let(:mapping) do
-          NvimConf::Mappings::Mapping.new(
+          model_class.new(
             map_method,
             "<Ctrl-g>",
             ":Git Blame"

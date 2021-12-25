@@ -1,4 +1,5 @@
 RSpec.describe NvimConf::Generators::Plugins::Code::Packer do
+  let(:model_class) { NvimConf::Models::Plugin }
   subject(:call) do
     NvimConf::Generators::Plugins::Code::Packer.new(
       plugin
@@ -8,7 +9,7 @@ RSpec.describe NvimConf::Generators::Plugins::Code::Packer do
   describe "#generate" do
     context "when no optional parameters are given" do
       let(:plugin) do
-        NvimConf::Plugins::Plugin.new(
+        model_class.new(
           "wbthomason/packer.nvim"
         )
       end
@@ -18,7 +19,7 @@ RSpec.describe NvimConf::Generators::Plugins::Code::Packer do
 
     context "when has opt argument" do
       let(:plugin) do
-        NvimConf::Plugins::Plugin.new(
+        model_class.new(
           "wbthomason/packer.nvim",
           opt: true
         )
@@ -29,7 +30,7 @@ RSpec.describe NvimConf::Generators::Plugins::Code::Packer do
 
     context "when has run argument" do
       let(:plugin) do
-        NvimConf::Plugins::Plugin.new(
+        model_class.new(
           "wbthomason/packer.nvim",
           run: "cd app && yarn install"
         )
@@ -40,7 +41,7 @@ RSpec.describe NvimConf::Generators::Plugins::Code::Packer do
 
     context "when has run and opt argument" do
       let(:plugin) do
-        NvimConf::Plugins::Plugin.new(
+        model_class.new(
           "wbthomason/packer.nvim",
           run: "cd app && yarn install",
           opt: true
