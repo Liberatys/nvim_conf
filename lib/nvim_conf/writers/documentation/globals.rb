@@ -16,6 +16,8 @@ module NvimConf
               level: 2
             )
           )
+
+          write_globals
         end
 
         private
