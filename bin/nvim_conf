@@ -1,0 +1,13 @@
+#!/usr/bin/env ruby
+# frozen_string_literal: true
+
+require 'bundler/setup'
+require 'nvim_conf'
+
+if ARGV[0]
+  puts "Running nvim_conf for #{ARGV[0]}"
+
+  load(Pathname.new(ARGV[0]).expand_path)
+else
+  puts 'No file path to run nvim_conf was given'
+end
