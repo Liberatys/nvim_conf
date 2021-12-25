@@ -10,7 +10,7 @@ module NvimConf
 
         WRITER_CONFIGURATION = {
           NvimConf::Settings::Manager => SettingsWriter,
-          NvimConf::Mappings::Manager => MappingsWriter,
+          NvimConf::Managers::Mappings => MappingsWriter,
           NvimConf::Managers::Plugins => Code::Plugins::Handler
         }
 

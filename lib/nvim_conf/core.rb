@@ -31,7 +31,7 @@ module NvimConf
 
     def mappings(namespace = nil, &block)
       evaluate_for_manager(
-        Mappings::Manager.new(namespace),
+        Managers::Mappings.new(namespace),
         &block
       )
     end

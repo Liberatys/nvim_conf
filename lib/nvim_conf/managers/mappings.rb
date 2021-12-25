@@ -2,8 +2,8 @@ require "nvim_conf/models/mapping"
 
 # TODO: Refactor error messages
 module NvimConf
-  module Mappings
-    class Manager
+  module Managers
+    class Mappings
       AVAILABLE_METHODS = %w[map map! nmap vmap imap cmap smap xmap omap lmap]
       attr_reader :mappings
 

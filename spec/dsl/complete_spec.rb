@@ -34,10 +34,10 @@ RSpec.describe "DSL => Complete" do
     managers = NvimConf.managers
     expect(managers.length).to eq(6)
     expect(managers[0].class).to eq(NvimConf::Managers::Plugins)
-    expect(managers[1].class).to eq(NvimConf::Mappings::Manager)
+    expect(managers[1].class).to eq(NvimConf::Managers::Mappings)
     expect(managers[2].class).to eq(NvimConf::Settings::Manager)
     expect(managers[3].class).to eq(NvimConf::Managers::CompilerConfigurations)
-    expect(managers[4].class).to eq(NvimConf::Mappings::Manager)
+    expect(managers[1].class).to eq(NvimConf::Managers::Mappings)
     expect(managers[5].class).to eq(NvimConf::Managers::Globals)
   end
 end
