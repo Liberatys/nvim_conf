@@ -37,6 +37,7 @@ module NvimConf
                 separator
               )
             end
+
             aggregate_writes_for_manager(manager)
           end
         end

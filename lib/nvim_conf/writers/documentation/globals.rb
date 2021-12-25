@@ -8,7 +8,7 @@ module NvimConf
         end
 
         def aggregate_writes
-          return if @managers.empty?
+          return if @managers.nil? || @managers.empty?
 
           @io.write(
             Utils::MarkdownFormatter.format_title(
