@@ -1,8 +1,17 @@
+[![Gem Version](https://badge.fury.io/rb/nvim_conf.svg)](https://badge.fury.io/rb/nvim_conf)
+
 # NvimConf
 
 A configuration manager for neovim that functions as an abstraction between your intentions and your configuration.
 Functions in a way that prevents having to rewrite everything in order to change your plugin manager.
 
+## Installation
+
+```markdown
+  gem install nvim_conf
+```
+
+nvim_conf path_to_configuration_file
 ## Usage
 
 ```ruby

@@ -19,7 +19,7 @@ Gem::Specification.new do |spec|
   spec.metadata["homepage_uri"] = spec.homepage
   spec.metadata["source_code_uri"] = "https://github.com/Liberatys/nvim_conf"
   spec.metadata["changelog_uri"] = "https://github.com/Liberatys/nvim_conf"
-  spec.files = Dir.glob("lib/**/*") + %w[CONTRIBUTING.md LICENSE README.md]
+  spec.files = Dir.glob("lib/**/*") + %w[LICENSE.txt README.md]
 
   spec.executables = "nvim_conf"
   spec.require_paths = ["lib"]
