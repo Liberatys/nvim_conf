@@ -34,6 +34,10 @@ RSpec.describe "Complete Write => Lua" do
         write true
         commented
       end
+
+      globals do
+        set :setter
+      end
     end
   end
 
@@ -118,6 +122,15 @@ RSpec.describe "Complete Write => Lua" do
 
       vim.o.nvim-linter = true
       vim.o.tester = true
+
+
+
+      -- ########################
+      -- #       Globals        #
+      -- ########################
+
+
+      vim.g.setter = true
     RESULT
 
     expect(File.read(path + "init.lua")).to eq(expected_result)
@@ -168,6 +181,10 @@ RSpec.describe "Complete Write => Lua" do
       </details>
 
 
+
+
+
+      ## Globals
 
     RESULT
 

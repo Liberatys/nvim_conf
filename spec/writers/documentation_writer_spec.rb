@@ -44,13 +44,13 @@ RSpec.describe NvimConf::Writers::Documentation::Orchestrator do
 
 
         ### Set
-      
+
         - tabstop => 4
         - tabstop => true
 
 
         ### Unset
-        
+
         - tabstop => false
 
 
@@ -59,24 +59,24 @@ RSpec.describe NvimConf::Writers::Documentation::Orchestrator do
 
 
         ### map
-        
+
         - <CTRL-c> => :MarkdownPreview<CR>
 
 
         ### nmap
-        
+
         - <CTRL-c> => :MarkdownPreview<CR>
 
 
         ### imap
-        
+
         - <CTRL-c> => :MarkdownPreview<CR>
 
 
         ## Plugins
 
         ### Packer
-        
+
         <details>
           <summary>
             tpope/vim-sensible
@@ -92,6 +92,8 @@ RSpec.describe NvimConf::Writers::Documentation::Orchestrator do
 
           tpope/vim-surround
         </details>
+
+
 
 
 

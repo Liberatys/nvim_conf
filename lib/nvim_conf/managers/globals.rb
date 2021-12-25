@@ -3,6 +3,8 @@ require "nvim_conf/models/global"
 module NvimConf
   module Managers
     class Globals
+      attr_reader :globals
+
       def initialize
         @globals = []
       end
@@ -12,6 +14,12 @@ module NvimConf
           name,
           value
         )
+      end
+
+      class << self
+        def section_name
+          "Globals"
+        end
       end
 
       def store?

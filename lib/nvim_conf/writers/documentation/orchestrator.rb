@@ -1,4 +1,5 @@
 require "nvim_conf/writers/documentation/mappings"
+require "nvim_conf/writers/documentation/globals"
 require "nvim_conf/writers/documentation/settings"
 require "nvim_conf/writers/documentation/plugins"
 
@@ -28,13 +29,20 @@ module NvimConf
             ],
             [
               NvimConf::Writers::Documentation::Plugins, NvimConf::Managers::Plugins
+            ],
+            [
+              NvimConf::Writers::Documentation::Globals, NvimConf::Managers::Globals
             ]
           ]
 
           writers.each_with_index do |relevant_classes, index|
             writer_class, manager_class = *relevant_classes
+            managers = @managers.select { |manager| manager.instance_of?(manager_class) }
+
+            next if managers.length.zero?
+
             writer_class.new(
-              @managers.select { |manager| manager.instance_of?(manager_class) },
+              managers,
               @io
             ).aggregate_writes
 

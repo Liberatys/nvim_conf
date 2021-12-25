@@ -14,7 +14,6 @@ module NvimConf
           @manager = manager
           @io = io
           @format = format
-          @commented = commented
         end
 
         def write

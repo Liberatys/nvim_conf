@@ -1,28 +1,30 @@
 module NvimConf
   module Generators
     module Globals
-      class Lua
-        def initialize(global)
-          @global = global
-        end
+      module Code
+        class Lua
+          def initialize(global)
+            @global = global
+          end
 
-        def generate
-          [
-            "vim.g.#{@global.name}",
-            escaped_value
-          ].join(' = ')
-        end
+          def generate
+            [
+              "vim.g.#{@global.name}",
+              escaped_value
+            ].join(" = ")
+          end
 
-        private
+          private
 
-        def escaped_value
-          return @global.value unless @global.value.is_a?(String)
+          def escaped_value
+            return @global.value unless @global.value.is_a?(String)
 
-          [
-            '"',
-            @global.value,
-            '"'
-          ].join
+            [
+              '"',
+              @global.value,
+              '"'
+            ].join
+          end
         end
       end
     end

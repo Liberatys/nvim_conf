@@ -1,4 +1,5 @@
 require "nvim_conf/writers/code/settings"
+require "nvim_conf/writers/code/globals"
 require "nvim_conf/writers/code/mappings"
 require "nvim_conf/writers/code/plugins/handler"
 
@@ -11,7 +12,8 @@ module NvimConf
         WRITER_CONFIGURATION = {
           NvimConf::Managers::Settings => SettingsWriter,
           NvimConf::Managers::Mappings => MappingsWriter,
-          NvimConf::Managers::Plugins => Code::Plugins::Handler
+          NvimConf::Managers::Plugins => Code::Plugins::Handler,
+          NvimConf::Managers::Globals => GlobalsWriter
         }
 
         def initialize(managers, io, configuration = nil)
