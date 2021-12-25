@@ -11,7 +11,7 @@ module NvimConf
     def plugins(name, bootstraped: false, &block)
       store_manager(
         evaluate_for_manager(
-          Plugins::Manager.new(name, bootstraped: bootstraped),
+          Managers::Plugins.new(name, bootstraped: bootstraped),
           &block
         )
       )

@@ -11,7 +11,7 @@ module NvimConf
         WRITER_CONFIGURATION = {
           NvimConf::Settings::Manager => SettingsWriter,
           NvimConf::Mappings::Manager => MappingsWriter,
-          NvimConf::Plugins::Manager => Plugins::Handler
+          NvimConf::Managers::Plugins => Code::Plugins::Handler
         }
 
         def initialize(managers, io, configuration = nil)

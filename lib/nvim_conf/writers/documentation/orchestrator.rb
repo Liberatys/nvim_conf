@@ -27,7 +27,7 @@ module NvimConf
               NvimConf::Writers::Documentation::Mappings, NvimConf::Mappings::Manager
             ],
             [
-              NvimConf::Writers::Documentation::Plugins, NvimConf::Plugins::Manager
+              NvimConf::Writers::Documentation::Plugins, NvimConf::Managers::Plugins
             ]
           ]
 
