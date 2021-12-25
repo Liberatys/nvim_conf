@@ -13,6 +13,12 @@ module NvimConf
         validate!
       end
 
+      class << self
+        def section_name
+          "Mappings"
+        end
+      end
+
       def validate!
         return if @namespace.nil? || @namespace.empty?
 

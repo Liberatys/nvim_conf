@@ -11,6 +11,12 @@ module NvimConf
         @plugins = []
       end
 
+      class << self
+        def section_name
+          "Plugins"
+        end
+      end
+
       def store?
         @plugins.any?
       end

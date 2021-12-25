@@ -58,10 +58,28 @@ RSpec.describe "Complete Write => Lua" do
     ).to eq(true)
 
     expected_result = <<~RESULT
+
+      -- ########################
+      -- #       Settings       #
+      -- ########################
+
+
       vim.o.tabstop = true
 
 
+
+      -- ########################
+      -- #       Mappings       #
+      -- ########################
+
+
       vim.api.nvim_set_keymap('n', '<CTRL-c>', ':Git Blame')
+
+
+
+      -- ########################
+      -- #       Plugins        #
+      -- ########################
 
 
       local fn = vim.fn
@@ -82,8 +100,20 @@ RSpec.describe "Complete Write => Lua" do
       end)
 
 
+
+      -- ########################
+      -- #       Mappings       #
+      -- ########################
+
+
       vim.api.nvim_set_keymap('n', '<CTRL-c>', ':Git Blame')
       vim.api.nvim_set_keymap('n', '<CTRL-c>', ':Git Blame')
+
+
+
+      -- ########################
+      -- #       Settings       #
+      -- ########################
 
 
       vim.o.nvim-linter = true
@@ -94,13 +124,13 @@ RSpec.describe "Complete Write => Lua" do
 
     expected_result = <<~RESULT
       # Configuration Documentation Vim - NvimConf
-    
+
       ## Settings
 
 
 
       ### Set
-    
+
       - tabstop => true
       - nvim-linter => true
       - tester => true
@@ -111,16 +141,16 @@ RSpec.describe "Complete Write => Lua" do
 
 
       ### nmap
-      
+
       - <CTRL-c> => :Git Blame
       - <CTRL-c> => :Git Blame
       - <CTRL-c> => :Git Blame
 
 
       ## Plugins
-      
+
       ### Packer
-      
+
       <details>
         <summary>
           glacambre/firenvim

@@ -3,6 +3,7 @@
 require "nvim_conf/version"
 require "nvim_conf/core"
 require "nvim_conf/writer"
+require "nvim_conf/commenter"
 require "nvim_conf/configuration_builder"
 require "nvim_conf/plugins/manager"
 require "nvim_conf/settings/manager"

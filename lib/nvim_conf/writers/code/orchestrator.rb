@@ -22,7 +22,15 @@ module NvimConf
 
         def aggregate_writes
           @managers.select { |manager| manager.class != NON_WRITABLE_MANAGER }.each_with_index do |manager, index|
-            if index.positive?
+            @io.write(
+              NvimConf::Commenter.comment_block(
+                @configuration,
+                manager.class.section_name,
+                spacer: index.positive?
+              )
+            )
+
+            if index.positive? || @configuration[:commented]
               @io.write(
                 separator
               )

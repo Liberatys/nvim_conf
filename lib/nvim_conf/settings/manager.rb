@@ -13,6 +13,12 @@ module NvimConf
         @settings.any?
       end
 
+      class << self
+        def section_name
+          "Settings"
+        end
+      end
+
       def set(key, value = nil, **params)
         store_setting(
           :set,
