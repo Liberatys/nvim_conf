@@ -1,7 +1,7 @@
 require "dry-initializer"
 
 module NvimConf
-  module Settings
+  module Models
     class Setting
       extend Dry::Initializer
 

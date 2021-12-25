@@ -1,4 +1,4 @@
-require "nvim_conf/compiler_configurations/compiler_configuration"
+require "nvim_conf/models/compiler_configuration"
 
 module NvimConf
   module CompilerConfigurations
@@ -64,7 +64,7 @@ module NvimConf
       end
 
       def build_configuration(name, value)
-        CompilerConfiguration.new(
+        Models::CompilerConfiguration.new(
           name,
           value
         )

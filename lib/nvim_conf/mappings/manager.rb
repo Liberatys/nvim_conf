@@ -1,4 +1,5 @@
-require "nvim_conf/mappings/mapping"
+require "nvim_conf/models/mapping"
+
 # TODO: Refactor error messages
 module NvimConf
   module Mappings
@@ -57,7 +58,7 @@ module NvimConf
       end
 
       def build_mapping(operator, binding, action)
-        Mapping.new(operator, binding, action)
+        Models::Mapping.new(operator, binding, action)
       end
     end
   end

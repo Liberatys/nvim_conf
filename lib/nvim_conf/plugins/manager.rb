@@ -1,4 +1,4 @@
-require "nvim_conf/plugins/plugin"
+require "nvim_conf/models/plugin"
 
 module NvimConf
   module Plugins
@@ -37,7 +37,7 @@ module NvimConf
       end
 
       def build_plugin(name, params)
-        Plugin.new(
+        Models::Plugin.new(
           name,
           **params
         )

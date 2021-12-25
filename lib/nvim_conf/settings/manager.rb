@@ -1,4 +1,4 @@
-require "nvim_conf/settings/setting"
+require "nvim_conf/models/setting"
 
 module NvimConf
   module Settings
@@ -42,7 +42,7 @@ module NvimConf
       end
 
       def build_setting(operation, key, value, scope)
-        Setting.new(operation, key, value, scope)
+        Models::Setting.new(operation, key, value, scope)
       end
     end
   end

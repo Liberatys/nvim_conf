@@ -1,8 +1,9 @@
 RSpec.describe NvimConf::Generators::Settings::Code::Vim do
+  let(:model_class) { NvimConf::Models::Setting }
   describe ".generate" do
     context "when setting has value" do
       let(:setting) do
-        NvimConf::Settings::Setting.new(
+        model_class.new(
           :set,
           :tabstop,
           4
@@ -18,7 +19,7 @@ RSpec.describe NvimConf::Generators::Settings::Code::Vim do
 
     context "when setting has no value" do
       let(:setting) do
-        NvimConf::Settings::Setting.new(
+        model_class.new(
           :set,
           :tabstop
         )
@@ -33,7 +34,7 @@ RSpec.describe NvimConf::Generators::Settings::Code::Vim do
 
     context "when unset is used" do
       let(:setting) do
-        NvimConf::Settings::Setting.new(
+        model_class.new(
           :unset,
           :tabstop
         )

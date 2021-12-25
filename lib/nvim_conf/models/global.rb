@@ -1,12 +1,12 @@
 require "dry-initializer"
 
 module NvimConf
-  module CompilerConfigurations
-    class CompilerConfiguration
+  module Models
+    class Global
       extend Dry::Initializer
 
       param :name
-      param :value
+      param :value, default: -> { true }
     end
   end
 end
