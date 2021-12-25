@@ -2,7 +2,7 @@ require "nvim_conf/managers/compiler_configurations"
 
 module NvimConf
   class ConfigurationBuilder
-    CONFIGURATION_MANAGER = NvimConf::CompilerConfigurations::Manager
+    CONFIGURATION_MANAGER = NvimConf::Managers::CompilerConfigurations
 
     def initialize(managers)
       @managers = managers

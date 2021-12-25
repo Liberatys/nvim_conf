@@ -6,7 +6,7 @@ module NvimConf
   module Writers
     module Code
       class Orchestrator
-        NON_WRITABLE_MANAGER = NvimConf::CompilerConfigurations::Manager
+        NON_WRITABLE_MANAGER = NvimConf::Managers::CompilerConfigurations
 
         WRITER_CONFIGURATION = {
           NvimConf::Settings::Manager => SettingsWriter,

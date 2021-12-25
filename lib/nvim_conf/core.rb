@@ -38,7 +38,7 @@ module NvimConf
 
     def configuration(&block)
       evaluate_for_manager(
-        CompilerConfigurations::Manager.new,
+        Managers::CompilerConfigurations.new,
         &block
       )
     end

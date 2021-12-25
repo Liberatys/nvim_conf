@@ -6,7 +6,7 @@ module NvimConf
   module Writers
     module Documentation
       class Orchestrator
-        NON_WRITABLE_MANAGER = NvimConf::CompilerConfigurations::Manager
+        NON_WRITABLE_MANAGER = NvimConf::Managers::CompilerConfigurations
 
         def initialize(managers, io, configuration = nil)
           @managers = managers
