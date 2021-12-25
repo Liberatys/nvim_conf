@@ -113,6 +113,28 @@ RSpec.describe "Complete Write => Lua" do
       - <CTRL-c> => :Git Blame
 
 
+      ## Plugins
+
+      ### Packer
+      
+      <details>
+        <summary>
+          glacambre/firenvim
+        </summary>
+
+        glacambre/firenvim
+      </details>
+
+      <details>
+        <summary>
+          glepnir/galaxyline.nvim
+        </summary>
+
+        glepnir/galaxyline.nvim
+      </details>
+
+
+
     RESULT
 
     expect(File.read(path + "Init.md")).to eq(expected_result)

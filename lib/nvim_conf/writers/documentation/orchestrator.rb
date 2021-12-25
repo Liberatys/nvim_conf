@@ -1,5 +1,6 @@
 require "nvim_conf/writers/documentation/mappings"
 require "nvim_conf/writers/documentation/settings"
+require "nvim_conf/writers/documentation/plugins"
 
 module NvimConf
   module Writers
@@ -18,16 +19,26 @@ module NvimConf
 
           write_main_header
 
-          {
-            NvimConf::Writers::Documentation::Settings => NvimConf::Settings::Manager,
-            NvimConf::Writers::Documentation::Mappings => NvimConf::Mappings::Manager
-          }.each do |writer_class, manager_class|
+          writers = [
+            [
+              NvimConf::Writers::Documentation::Settings, NvimConf::Settings::Manager
+            ],
+            [
+              NvimConf::Writers::Documentation::Mappings, NvimConf::Mappings::Manager
+            ],
+            [
+              NvimConf::Writers::Documentation::Plugins, NvimConf::Plugins::Manager
+            ]
+          ]
+
+          writers.each_with_index do |relevant_classes, index|
+            writer_class, manager_class = *relevant_classes
             writer_class.new(
               @managers.select { |manager| manager.instance_of?(manager_class) },
               @io
             ).aggregate_writes
 
-            @io.write("\n\n")
+            @io.write("\n\n") if index != (writers.length - 1)
           end
         end
 

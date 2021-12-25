@@ -20,6 +20,11 @@ RSpec.describe NvimConf::Writers::Documentation::Orchestrator do
           nmap "<CTRL-c>", ":MarkdownPreview<CR>"
           imap "<CTRL-c>", ":MarkdownPreview<CR>"
         end
+
+        plugins(:packer) do
+          plug "tpope/vim-sensible"
+          plug "tpope/vim-surround"
+        end
       end
     end
 
@@ -33,32 +38,54 @@ RSpec.describe NvimConf::Writers::Documentation::Orchestrator do
 
       expected_result = <<~RESULT
         # Configuration Documentation Vim - NvimConf
-      
+
         ## Settings
-      
+
 
         ### Set
         - tabstop => 4
         - tabstop => true
 
-        
+
         ### Unset
         - tabstop => false
-      
+
 
         ## Mappings
-     
-      
+
+
         ### map
         - <CTRL-c> => :MarkdownPreview<CR>
 
 
         ### nmap
         - <CTRL-c> => :MarkdownPreview<CR>
-      
+
 
         ### imap
         - <CTRL-c> => :MarkdownPreview<CR>
+
+
+        ## Plugins
+
+        ### Packer
+        
+        <details>
+          <summary>
+            tpope/vim-sensible
+          </summary>
+
+          tpope/vim-sensible
+        </details>
+
+        <details>
+          <summary>
+            tpope/vim-surround
+          </summary>
+
+          tpope/vim-surround
+        </details>
+
 
 
       RESULT
