@@ -1,4 +1,4 @@
-require 'nvim_conf/models/compiler_configuration'
+require "nvim_conf/models/compiler_configuration"
 
 module NvimConf
   module Managers
