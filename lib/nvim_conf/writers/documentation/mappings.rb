@@ -2,9 +2,6 @@ module NvimConf
   module Writers
     module Documentation
       class Mappings
-        MAIN_HEADER_PREFIX = "##"
-        MAPPING_HEADER_PREFIX = "###"
-
         def initialize(managers, io)
           @managers = managers
           @io = io
@@ -14,9 +11,9 @@ module NvimConf
           return if @managers.empty?
 
           @io.write(
-            title(
+            Utils::MarkdownFormatter.format_title(
               "Mappings",
-              MAIN_HEADER_PREFIX
+              level: 2
             )
           )
 
@@ -30,9 +27,9 @@ module NvimConf
             write_separator
 
             @io.write(
-              title(
+              Utils::MarkdownFormatter.format_title(
                 operator,
-                MAPPING_HEADER_PREFIX
+                level: 3
               )
             )
 
@@ -53,12 +50,8 @@ module NvimConf
 
         def write_separator
           @io.write(
-            "\n\n"
+            Utils::MarkdownFormatter.separator
           )
-        end
-
-        def title(text, prefix)
-          "#{prefix} #{text}\n"
         end
       end
     end

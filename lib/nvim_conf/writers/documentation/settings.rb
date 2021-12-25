@@ -13,9 +13,9 @@ module NvimConf
           return if @managers.empty?
 
           @io.write(
-            title(
+            Utils::MarkdownFormatter.format_title(
               "Settings",
-              MAIN_HEADER_PREFIX
+              level: 2
             )
           )
 
@@ -29,9 +29,9 @@ module NvimConf
             write_separator
 
             @io.write(
-              title(
+              Utils::MarkdownFormatter.format_title(
                 operation.capitalize,
-                "###"
+                level: 3
               )
             )
 
@@ -58,12 +58,8 @@ module NvimConf
 
         def write_separator
           @io.write(
-            "\n\n"
+            Utils::MarkdownFormatter.separator
           )
-        end
-
-        def title(text, prefix)
-          "#{prefix} #{text}\n"
         end
       end
     end

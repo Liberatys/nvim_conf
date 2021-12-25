@@ -98,7 +98,9 @@ RSpec.describe "Complete Write => Lua" do
       ## Settings
 
 
+
       ### Set
+    
       - tabstop => true
       - nvim-linter => true
       - tester => true
@@ -107,14 +109,16 @@ RSpec.describe "Complete Write => Lua" do
       ## Mappings
 
 
+
       ### nmap
+      
       - <CTRL-c> => :Git Blame
       - <CTRL-c> => :Git Blame
       - <CTRL-c> => :Git Blame
 
 
       ## Plugins
-
+      
       ### Packer
       
       <details>

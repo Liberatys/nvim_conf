@@ -42,27 +42,34 @@ RSpec.describe NvimConf::Writers::Documentation::Orchestrator do
         ## Settings
 
 
+
         ### Set
+      
         - tabstop => 4
         - tabstop => true
 
 
         ### Unset
+        
         - tabstop => false
 
 
         ## Mappings
 
 
+
         ### map
+        
         - <CTRL-c> => :MarkdownPreview<CR>
 
 
         ### nmap
+        
         - <CTRL-c> => :MarkdownPreview<CR>
 
 
         ### imap
+        
         - <CTRL-c> => :MarkdownPreview<CR>
 
 

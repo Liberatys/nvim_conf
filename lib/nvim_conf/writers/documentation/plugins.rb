@@ -2,9 +2,6 @@ module NvimConf
   module Writers
     module Documentation
       class Plugins
-        MAIN_HEADER_PREFIX = "##"
-        MANAGER_HEADER_PREFIX = "###"
-
         def initialize(managers, io)
           @managers = managers
           @io = io
@@ -14,12 +11,11 @@ module NvimConf
           return if @managers.empty?
 
           @io.write(
-            title(
+            Utils::MarkdownFormatter.format_title(
               "Plugins",
-              MAIN_HEADER_PREFIX
+              level: 2
             )
           )
-          @io.write("\n")
 
           write_plugins
         end
@@ -29,12 +25,11 @@ module NvimConf
         def write_plugins
           @managers.each do |manager|
             @io.write(
-              title(
+              Utils::MarkdownFormatter.format_title(
                 manager.name.capitalize,
-                MANAGER_HEADER_PREFIX
+                level: 3
               )
             )
-            @io.write("\n")
 
             manager.plugins.each do |plugin|
               @io.write(
@@ -52,12 +47,8 @@ module NvimConf
 
         def write_separator
           @io.write(
-            "\n\n"
+            Utils::MarkdownFormatter.separator
           )
-        end
-
-        def title(text, prefix)
-          "#{prefix} #{text}\n"
         end
       end
     end
