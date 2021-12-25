@@ -4,7 +4,7 @@ module NvimConf
       class Mappings
         def initialize(managers, io)
           @managers = managers
-          @io = io
+          @io = Utils::IoOperator.new(io)
         end
 
         def aggregate_writes
@@ -24,7 +24,7 @@ module NvimConf
 
         def write_mappings(grouped_mappings)
           grouped_mappings.each do |operator, mappings|
-            write_separator
+            @io.write_separator
 
             @io.write(
               Utils::MarkdownFormatter.format_title(
@@ -46,12 +46,6 @@ module NvimConf
 
         def all_mappings
           @managers.map(&:mappings).flatten
-        end
-
-        def write_separator
-          @io.write(
-            Utils::MarkdownFormatter.separator
-          )
         end
       end
     end

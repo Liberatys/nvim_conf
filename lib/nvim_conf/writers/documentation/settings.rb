@@ -2,11 +2,9 @@ module NvimConf
   module Writers
     module Documentation
       class Settings
-        MAIN_HEADER_PREFIX = "##"
-
         def initialize(managers, io)
           @managers = managers
-          @io = io
+          @io = Utils::IoOperator.new(io)
         end
 
         def aggregate_writes
@@ -26,7 +24,7 @@ module NvimConf
 
         def write_settings_groups(groups)
           groups.each do |operation, settings|
-            write_separator
+            @io.write_separator
 
             @io.write(
               Utils::MarkdownFormatter.format_title(
@@ -54,12 +52,6 @@ module NvimConf
 
         def all_settings
           @managers.map(&:settings).flatten
-        end
-
-        def write_separator
-          @io.write(
-            Utils::MarkdownFormatter.separator
-          )
         end
       end
     end

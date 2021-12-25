@@ -4,7 +4,7 @@ module NvimConf
       class Plugins
         def initialize(managers, io)
           @managers = managers
-          @io = io
+          @io = Utils::IoOperator.new(io)
         end
 
         def aggregate_writes
@@ -41,14 +41,8 @@ module NvimConf
               @io.write("\n")
             end
 
-            write_separator
+            @io.write_separator
           end
-        end
-
-        def write_separator
-          @io.write(
-            Utils::MarkdownFormatter.separator
-          )
         end
       end
     end
