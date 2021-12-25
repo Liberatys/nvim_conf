@@ -36,14 +36,7 @@ module NvimConf
           end
 
           def command_arguments
-            [
-              :as,
-              :opt,
-              :file_types,
-              :branch,
-              :run,
-              :cmd
-            ].map do |argument|
+            @plugin.class.optional_arguments.map do |argument|
               next if @plugin.send(argument).nil?
 
               [
@@ -60,14 +53,9 @@ module NvimConf
           end
 
           def args?
-            [
-              @plugin.as,
-              @plugin.opt,
-              @plugin.branch,
-              @plugin.file_types,
-              @plugin.cmd,
-              @plugin.run
-            ].any? { |argument| !argument.nil? }
+            @plugin.class.optional_arguments.map do |argument|
+              @plugin.send(argument)
+            end.any? { |argument| !argument.nil? }
           end
         end
       end

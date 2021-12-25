@@ -1,7 +1,7 @@
 module NvimConf
   module Writers
     module Documentation
-      class Mappings
+      class Plugins
         def initialize(managers, io)
           @managers = managers
           @io = Utils::IoOperator.new(io)
@@ -12,40 +12,37 @@ module NvimConf
 
           @io.write(
             Utils::MarkdownFormatter.format_title(
-              "Mappings",
+              "Plugins",
               level: 2
             )
           )
 
-          write_mappings(all_mappings.group_by(&:operator))
+          write_plugins
         end
 
         private
 
-        def write_mappings(grouped_mappings)
-          grouped_mappings.each do |operator, mappings|
-            @io.write_separator
-
+        def write_plugins
+          @managers.each do |manager|
             @io.write(
               Utils::MarkdownFormatter.format_title(
-                operator,
+                manager.name.capitalize,
                 level: 3
               )
             )
 
-            mappings.each do |mapping|
+            manager.plugins.each do |plugin|
               @io.write(
-                [
-                  "- #{mapping.binding}",
-                  mapping.action
-                ].join(" => ") + "\n"
+                Utils::MarkdownFormatter.collapisible(
+                  plugin.name,
+                  plugin.name
+                )
               )
+              @io.write("\n")
             end
-          end
-        end
 
-        def all_mappings
-          @managers.map(&:mappings).flatten
+            @io.write_separator
+          end
         end
       end
     end
