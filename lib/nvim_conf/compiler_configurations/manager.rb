@@ -2,7 +2,7 @@ require "nvim_conf/compiler_configurations/compiler_configuration"
 
 module NvimConf
   module CompilerConfigurations
-    class Manager < NvimConf::Manager
+    class Manager
       attr_reader :configurations
 
       def initialize

@@ -2,7 +2,7 @@ require "nvim_conf/settings/setting"
 
 module NvimConf
   module Settings
-    class Manager < NvimConf::Manager
+    class Manager
       attr_reader :settings
 
       def initialize

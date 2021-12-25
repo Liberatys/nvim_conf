@@ -2,7 +2,7 @@ require "nvim_conf/plugins/plugin"
 
 module NvimConf
   module Plugins
-    class Manager < NvimConf::Manager
+    class Manager
       attr_reader :plugins, :name, :bootstraped
 
       def initialize(name, bootstraped: false)
