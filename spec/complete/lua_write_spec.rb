@@ -17,6 +17,11 @@ RSpec.describe "Complete Write => Lua" do
         plug "glepnir/galaxyline.nvim", opt: true, branch: "main"
       end
 
+      plugins(:paq) do
+        plug "glacambre/firenvim", opt: true, run: "cd folder"
+        plug "glepnir/galaxyline.nvim", opt: true, branch: "main"
+      end
+
       mappings(:nmap) do
         m "<CTRL-c>", ":Git Blame"
         m "<CTRL-c>", ":Git Blame"
@@ -106,6 +111,18 @@ RSpec.describe "Complete Write => Lua" do
 
 
       -- ########################
+      -- #       Plugins        #
+      -- ########################
+
+
+      require "paq" {
+        {'glacambre/firenvim', opt = true, run = 'cd folder'};
+        {'glepnir/galaxyline.nvim', opt = true, branch = 'main'};
+      }
+
+
+
+      -- ########################
       -- #       Mappings       #
       -- ########################
 
@@ -181,11 +198,32 @@ RSpec.describe "Complete Write => Lua" do
       </details>
 
 
+      
+      ### Paq
+
+      <details>
+        <summary>
+          glacambre/firenvim
+        </summary>
+
+        glacambre/firenvim
+      </details>
+
+      <details>
+        <summary>
+          glepnir/galaxyline.nvim
+        </summary>
+
+        glepnir/galaxyline.nvim
+      </details>
+
+
 
 
 
       ## Globals
 
+      - setter => true
     RESULT
 
     expect(File.read(path + "Init.md")).to eq(expected_result)

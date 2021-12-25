@@ -1,4 +1,5 @@
 require_relative "./packer"
+require_relative "./paq"
 
 module NvimConf
   module Writers
@@ -9,6 +10,11 @@ module NvimConf
             packer: {
               generator: NvimConf::Generators::Plugins::Code::Packer,
               writer: NvimConf::Writers::Code::Plugins::Packer,
+              indent: 2
+            },
+            paq: {
+              generator: NvimConf::Generators::Plugins::Code::Paq,
+              writer: NvimConf::Writers::Code::Plugins::Paq,
               indent: 2
             }
           }
