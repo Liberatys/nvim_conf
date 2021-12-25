@@ -9,9 +9,10 @@ Functions in a way that prevents having to rewrite everything in order to change
 
 ```markdown
   gem install nvim_conf
+  
+  nvim_conf path_to_configuration_file
 ```
 
-nvim_conf path_to_configuration_file
 ## Usage
 
 ```ruby
