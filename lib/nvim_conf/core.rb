@@ -24,7 +24,7 @@ module NvimConf
 
     def settings(&block)
       evaluate_for_manager(
-        Settings::Manager.new,
+        Managers::Settings.new,
         &block
       )
     end

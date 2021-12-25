@@ -1,8 +1,8 @@
 require "nvim_conf/models/setting"
 
 module NvimConf
-  module Settings
-    class Manager
+  module Managers
+    class Settings
       attr_reader :settings
 
       def initialize

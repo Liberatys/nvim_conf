@@ -9,7 +9,7 @@ module NvimConf
         NON_WRITABLE_MANAGER = NvimConf::Managers::CompilerConfigurations
 
         WRITER_CONFIGURATION = {
-          NvimConf::Settings::Manager => SettingsWriter,
+          NvimConf::Managers::Settings => SettingsWriter,
           NvimConf::Managers::Mappings => MappingsWriter,
           NvimConf::Managers::Plugins => Code::Plugins::Handler
         }

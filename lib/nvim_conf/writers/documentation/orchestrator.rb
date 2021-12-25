@@ -21,7 +21,7 @@ module NvimConf
 
           writers = [
             [
-              NvimConf::Writers::Documentation::Settings, NvimConf::Settings::Manager
+              NvimConf::Writers::Documentation::Settings, NvimConf::Managers::Settings
             ],
             [
               NvimConf::Writers::Documentation::Mappings, NvimConf::Managers::Mappings
