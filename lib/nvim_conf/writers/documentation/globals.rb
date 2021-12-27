@@ -27,10 +27,17 @@ module NvimConf
             @io.write(
               [
                 "- #{global.name}",
-                global.value
+                transformed_value(global.value)
               ].join(" => ") + "\n"
             )
           end
+        end
+
+        def transformed_value(value)
+          return value.join(", ") if value.is_a?(Array)
+          return value unless value.nil?
+
+          value
         end
       end
     end

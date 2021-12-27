@@ -28,11 +28,12 @@ RSpec.describe "DSL => Settings" do
             set "tabstop", 2
             set "softtab", true
             unset "tabstop"
+            add "context", "value"
           end
         end
         expect(NvimConf.managers.length).to eq(1)
-        expect(NvimConf.managers.first.settings.length).to eq(3)
-        expect(NvimConf.managers.first.settings.map(&:operation)).to eq(%i[set set unset])
+        expect(NvimConf.managers.first.settings.length).to eq(4)
+        expect(NvimConf.managers.first.settings.map(&:operation)).to eq(%i[set set unset add])
       end
     end
   end

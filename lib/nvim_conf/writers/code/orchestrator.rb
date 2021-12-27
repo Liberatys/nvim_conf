@@ -1,4 +1,5 @@
 require "nvim_conf/writers/code/settings"
+require "nvim_conf/writers/code/requires"
 require "nvim_conf/writers/code/globals"
 require "nvim_conf/writers/code/mappings"
 require "nvim_conf/writers/code/plugins/handler"
@@ -13,7 +14,8 @@ module NvimConf
           NvimConf::Managers::Settings => SettingsWriter,
           NvimConf::Managers::Mappings => MappingsWriter,
           NvimConf::Managers::Plugins => Code::Plugins::Handler,
-          NvimConf::Managers::Globals => GlobalsWriter
+          NvimConf::Managers::Globals => GlobalsWriter,
+          NvimConf::Managers::Requires => RequiresWriter
         }
 
         def initialize(managers, io, configuration = nil)
@@ -27,7 +29,7 @@ module NvimConf
             @io.write(
               NvimConf::Commenter.comment_block(
                 @configuration,
-                manager.class.section_name,
+                manager_section_name(manager),
                 spacer: index.positive?
               )
             )
@@ -43,6 +45,16 @@ module NvimConf
         end
 
         private
+
+        def manager_section_name(manager)
+          return manager.class.section_name unless manager.respond_to?(:title)
+          return manager.class.section_name if manager.title.nil?
+
+          [
+            manager.class.section_name,
+            manager.title
+          ].join(" - ")
+        end
 
         def separator
           "\n\n"
