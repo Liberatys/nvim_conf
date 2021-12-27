@@ -22,6 +22,11 @@ NvimConf::Core.define do
     plug("tpope/vim-surround")
   end
 
+  requires do
+    setup "nvim_lint"
+    setup "tester"
+  end
+
   configuration do # configurate the generation of code and documentation
     output_folder '$HOME/.config/nvim'
     code_output :lua # you want lua? you want vim? NO PROBLEM!
@@ -46,6 +51,9 @@ return require('packer').startup(function()
   use "tpope/vim-fugitive"
   use "tpope/vim-surround"
 end)
+
+require "nvim_lint".setup{}
+require "tester".setup{}
 
 vim.o.tabstop = true
 vim.o.tabstop = false
