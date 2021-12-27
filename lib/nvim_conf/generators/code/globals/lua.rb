@@ -10,20 +10,35 @@ module NvimConf
           def generate
             [
               "vim.g.#{@global.name}",
-              escaped_value
+              format_value(@global.value)
             ].join(" = ")
           end
 
           private
 
-          def escaped_value
-            return @global.value unless @global.value.is_a?(String)
+          def format_value(value)
+            case value
+            when String
+              [
+                '"',
+                value,
+                '"'
+              ].join
+            when Array
+              [
+                "[",
+                value.map { |inner_value| format_value(inner_value) }.join(", "),
+                "]"
+              ].join
+            else
+              fallback_to_truthy_on_nil(value)
+            end
+          end
 
-            [
-              '"',
-              @global.value,
-              '"'
-            ].join
+          def fallback_to_truthy_on_nil(value)
+            return value unless value.nil?
+
+            @setting.operation == :set
           end
         end
       end

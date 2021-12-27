@@ -49,6 +49,7 @@ module NvimConf
         end
 
         def transformed_value(setting, value)
+          return value.join(", ") if value.is_a?(Array)
           return value unless value.nil?
 
           setting.operation == :set

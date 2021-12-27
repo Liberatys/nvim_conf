@@ -17,7 +17,7 @@ module NvimConf
           def generate
             [
               call_signature,
-              escaped_value
+              format_value(@setting.value)
             ].join(operator)
           end
 
@@ -35,14 +35,23 @@ module NvimConf
             ].join(".")
           end
 
-          def escaped_value
-            return fallback_to_truthy_on_nil(@setting.value) unless @setting.value.is_a?(String)
-
-            [
-              '"',
-              @setting.value,
-              '"'
-            ].join
+          def format_value(value)
+            case value
+            when String
+              [
+                '"',
+                value,
+                '"'
+              ].join
+            when Array
+              [
+                "[",
+                value.map { |inner_value| format_value(inner_value) }.join(", "),
+                "]"
+              ].join
+            else
+              fallback_to_truthy_on_nil(value)
+            end
           end
 
           def fallback_to_truthy_on_nil(value)
