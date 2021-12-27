@@ -66,8 +66,40 @@ File: $HOME/.config/nvim/Init.md
 ## Why use NvimConf?
 
 Neovim is changing fast! Every other week we can use an new package manager.
-
 There is always a better version of your autocomplete plugin.
+
+## Ruby
+
+Because the abstraction is written in ruby and the configuration is also just a ruby file you are able to execute
+any valid ruby code directly in your configuration. This allows you to introduce complex build tasks.
+
+An example:
+
+Input: 
+```ruby
+[
+  :gzip,
+  :zip,
+  :zipPlugin,
+  :tar,
+  :tarPlugin,
+  :getscript
+].each do | setting|
+  set "loaded_#{setting}", true
+end
+```
+
+Output:
+```lua
+vim.g.loaded_gzip = true
+vim.g.loaded_zip = true
+vim.g.loaded_zipPlugin = true
+vim.g.loaded_tar = true
+vim.g.loaded_tarPlugin = true
+vim.g.loaded_getscript = true
+```
+
+Why repeat yourself when you can script it?
 
 ### **The goals of NvimConf are**
 - Add automatic documentation to your configuration
