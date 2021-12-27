@@ -1,46 +1,50 @@
-require "fileutils"
+require 'fileutils'
 
-RSpec.describe "Complete Write => Lua" do
-  let(:path) { Pathname.new("~/.config/nvim_conf/test").expand_path }
+RSpec.describe 'Complete Write => Lua' do
+  let(:path) { Pathname.new('~/.config/nvim_conf/test').expand_path }
 
   before do
     NvimConf::Core.define do
       settings do
-        set "tabstop"
+        set 'tabstop'
       end
 
       mappings do
-        nmap "<CTRL-c>", ":Git Blame"
+        nmap '<CTRL-c>', ':Git Blame'
       end
 
       plugins(:packer, bootstraped: true) do
-        plug "glacambre/firenvim", opt: true, run: "cd folder"
-        plug "glepnir/galaxyline.nvim", opt: true, branch: "main"
+        plug 'glacambre/firenvim', opt: true, run: 'cd folder'
+        plug 'glepnir/galaxyline.nvim', opt: true, branch: 'main'
       end
 
-      plugins(:packer, title: "FireNvim") do
-        plug "glacambre/firenvim", opt: true, run: "cd folder"
+      plugins(:packer, title: 'FireNvim') do
+        plug 'glacambre/firenvim', opt: true, run: 'cd folder'
       end
 
       plugins(:paq) do
-        plug "glacambre/firenvim", opt: true, run: "cd folder"
-        plug "glepnir/galaxyline.nvim", opt: true, branch: "main"
+        plug 'glacambre/firenvim', opt: true, run: 'cd folder'
+        plug 'glepnir/galaxyline.nvim', opt: true, branch: 'main'
+      end
+
+      requires do
+        setup 'testing'
       end
 
       mappings(:nmap) do
-        m "<CTRL-c>", ":Git Blame"
-        m "<CTRL-c>", ":Git Blame"
+        m '<CTRL-c>', ':Git Blame'
+        m '<CTRL-c>', ':Git Blame'
       end
 
-      settings "General" do
-        set "nvim-linter"
-        set "tester"
+      settings 'General' do
+        set 'nvim-linter'
+        set 'tester'
 
-        add "plugins", "new"
+        add 'plugins', 'new'
       end
 
       configuration do
-        output_folder "~/.config/nvim_conf/test"
+        output_folder '~/.config/nvim_conf/test'
         code_output :lua
         documented true
         write true
@@ -54,13 +58,13 @@ RSpec.describe "Complete Write => Lua" do
   end
 
   after do
-    unless ENV["PREVENT_DESTRUCTION"]
-      path = Pathname.new("~/.config/nvim_conf").expand_path
+    unless ENV['PREVENT_DESTRUCTION']
+      path = Pathname.new('~/.config/nvim_conf').expand_path
       FileUtils.remove_dir(path) if File.directory?(path)
     end
   end
 
-  it "creates folder with init.lua" do
+  it 'creates folder with init.lua' do
     expect(
       File.exist?(
         path
@@ -69,7 +73,7 @@ RSpec.describe "Complete Write => Lua" do
 
     expect(
       File.exist?(
-        path + "init.lua"
+        path + 'init.lua'
       )
     ).to eq(true)
 
@@ -121,7 +125,7 @@ RSpec.describe "Complete Write => Lua" do
       -- ########################
       -- #  Plugins - FireNvim  #
       -- ########################
-      
+
 
       return require('packer').startup(function()
 
@@ -140,6 +144,15 @@ RSpec.describe "Complete Write => Lua" do
         {'glacambre/firenvim', opt = true, run = 'cd folder'};
         {'glepnir/galaxyline.nvim', opt = true, branch = 'main'};
       }
+
+
+
+      -- ########################
+      -- #       Requires       #
+      -- ########################
+
+
+      require 'testing'.setup{}
 
 
 
@@ -172,7 +185,7 @@ RSpec.describe "Complete Write => Lua" do
       vim.g.setter = true
     RESULT
 
-    expect(File.read(path + "init.lua")).to eq(expected_result)
+    expect(File.read(path + 'init.lua')).to eq(expected_result)
 
     expected_result = <<~RESULT
       # Configuration Documentation Vim - NvimConf
@@ -189,9 +202,9 @@ RSpec.describe "Complete Write => Lua" do
 
 
       ### Add
-      
+
       - plugins += new
-     
+
 
       ## Mappings
 
@@ -225,7 +238,7 @@ RSpec.describe "Complete Write => Lua" do
       </details>
 
 
-      
+
       ### Packer
 
       <details>
@@ -265,6 +278,6 @@ RSpec.describe "Complete Write => Lua" do
       - setter => true
     RESULT
 
-    expect(File.read(path + "Init.md")).to eq(expected_result)
+    expect(File.read(path + 'Init.md')).to eq(expected_result)
   end
 end

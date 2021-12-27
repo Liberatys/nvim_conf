@@ -15,6 +15,13 @@ module NvimConf
       )
     end
 
+    def requires(&block)
+      evaluate_for_manager(
+        Managers::Requires.new,
+        &block
+      )
+    end
+
     def globals(&block)
       evaluate_for_manager(
         Managers::Globals.new,
@@ -51,7 +58,7 @@ module NvimConf
     end
 
     def store_manager(manager)
-      return unless manager.store?
+      return unless manager.send(:store?)
 
       NvimConf.managers.push(
         manager
