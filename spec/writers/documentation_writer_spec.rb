@@ -32,7 +32,7 @@ RSpec.describe NvimConf::Writers::Documentation::Orchestrator do
       io_device = StringIO.new
       described_class.new(
         NvimConf.managers,
-        io_device,
+        NvimConf::Utils::IoOperator.new(io_device),
         {format: :vim, commented: false, documented: true}
       ).aggregate_writes
 

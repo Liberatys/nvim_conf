@@ -27,7 +27,7 @@ module NvimConf
       File.open(documentation_file_path, "w+") do |file|
         NvimConf::Writers::Documentation::Orchestrator.new(
           @managers,
-          file,
+          Utils::IoOperator.new(file),
           @configuration
         ).aggregate_writes
       end
