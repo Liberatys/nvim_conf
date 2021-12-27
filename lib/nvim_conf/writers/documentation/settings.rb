@@ -38,10 +38,14 @@ module NvimConf
                 [
                   "- #{setting.key}",
                   transformed_value(setting, setting.value)
-                ].join(" => ") + "\n"
+                ].join(operator(setting)) + "\n"
               )
             end
           end
+        end
+
+        def operator(setting)
+          %i[set unset].include?(setting.operation) ? " => " : " += "
         end
 
         def transformed_value(setting, value)

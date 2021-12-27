@@ -18,10 +18,14 @@ module NvimConf
             [
               call_signature,
               escaped_value
-            ].join(" = ")
+            ].join(operator)
           end
 
           private
+
+          def operator
+            %i[set unset].include?(@setting.operation) ? " = " : " += "
+          end
 
           def call_signature
             [

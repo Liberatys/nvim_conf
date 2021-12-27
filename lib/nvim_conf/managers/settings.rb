@@ -3,9 +3,10 @@ require "nvim_conf/models/setting"
 module NvimConf
   module Managers
     class Settings
-      attr_reader :settings
+      attr_reader :settings, :title
 
-      def initialize
+      def initialize(title)
+        @title = title
         @settings = []
       end
 
@@ -32,6 +33,14 @@ module NvimConf
         store_setting(
           :unset,
           key: key
+        )
+      end
+
+      def add(key, value)
+        store_setting(
+          :add,
+          key: key,
+          value: value
         )
       end
 

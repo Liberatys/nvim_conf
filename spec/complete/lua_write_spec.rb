@@ -8,6 +8,7 @@ RSpec.describe "Complete Write => Lua" do
       settings do
         set "tabstop"
       end
+
       mappings do
         nmap "<CTRL-c>", ":Git Blame"
       end
@@ -15,6 +16,10 @@ RSpec.describe "Complete Write => Lua" do
       plugins(:packer, bootstraped: true) do
         plug "glacambre/firenvim", opt: true, run: "cd folder"
         plug "glepnir/galaxyline.nvim", opt: true, branch: "main"
+      end
+
+      plugins(:packer, title: "FireNvim") do
+        plug "glacambre/firenvim", opt: true, run: "cd folder"
       end
 
       plugins(:paq) do
@@ -27,9 +32,11 @@ RSpec.describe "Complete Write => Lua" do
         m "<CTRL-c>", ":Git Blame"
       end
 
-      settings do
+      settings "General" do
         set "nvim-linter"
         set "tester"
+
+        add "plugins", "new"
       end
 
       configuration do
@@ -112,6 +119,19 @@ RSpec.describe "Complete Write => Lua" do
 
 
       -- ########################
+      -- #  Plugins - FireNvim  #
+      -- ########################
+      
+
+      return require('packer').startup(function()
+
+        use 'wbthomason/packer.nvim'
+        {use 'glacambre/firenvim', opt = true, run = 'cd folder'}
+      end)
+
+
+
+      -- ########################
       -- #       Plugins        #
       -- ########################
 
@@ -134,12 +154,13 @@ RSpec.describe "Complete Write => Lua" do
 
 
       -- ########################
-      -- #       Settings       #
+      -- #  Settings - General  #
       -- ########################
 
 
       vim.o.nvim-linter = true
       vim.o.tester = true
+      vim.o.plugins += "new"
 
 
 
@@ -167,6 +188,11 @@ RSpec.describe "Complete Write => Lua" do
       - tester => true
 
 
+      ### Add
+      
+      - plugins += new
+     
+
       ## Mappings
 
 
@@ -187,7 +213,7 @@ RSpec.describe "Complete Write => Lua" do
           glacambre/firenvim
         </summary>
 
-        glacambre/firenvim
+        https://github.com/glacambre/firenvim
       </details>
 
       <details>
@@ -195,11 +221,23 @@ RSpec.describe "Complete Write => Lua" do
           glepnir/galaxyline.nvim
         </summary>
 
-        glepnir/galaxyline.nvim
+        https://github.com/glepnir/galaxyline.nvim
       </details>
 
 
       
+      ### Packer
+
+      <details>
+        <summary>
+          glacambre/firenvim
+        </summary>
+
+        https://github.com/glacambre/firenvim
+      </details>
+
+
+
       ### Paq
 
       <details>
@@ -207,7 +245,7 @@ RSpec.describe "Complete Write => Lua" do
           glacambre/firenvim
         </summary>
 
-        glacambre/firenvim
+        https://github.com/glacambre/firenvim
       </details>
 
       <details>
@@ -215,7 +253,7 @@ RSpec.describe "Complete Write => Lua" do
           glepnir/galaxyline.nvim
         </summary>
 
-        glepnir/galaxyline.nvim
+        https://github.com/glepnir/galaxyline.nvim
       </details>
 
 

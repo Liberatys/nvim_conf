@@ -3,10 +3,11 @@ require "nvim_conf/models/plugin"
 module NvimConf
   module Managers
     class Plugins
-      attr_reader :plugins, :name, :bootstraped
+      attr_reader :plugins, :name, :title, :bootstraped
 
-      def initialize(name, bootstraped: false)
+      def initialize(name, title, bootstraped: false)
         @name = name
+        @title = title
         @bootstraped = bootstraped
         @plugins = []
       end

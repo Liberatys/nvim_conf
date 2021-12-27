@@ -82,7 +82,7 @@ RSpec.describe NvimConf::Writers::Documentation::Orchestrator do
             tpope/vim-sensible
           </summary>
 
-          tpope/vim-sensible
+          https://github.com/tpope/vim-sensible
         </details>
 
         <details>
@@ -90,7 +90,7 @@ RSpec.describe NvimConf::Writers::Documentation::Orchestrator do
             tpope/vim-surround
           </summary>
 
-          tpope/vim-surround
+          https://github.com/tpope/vim-surround
         </details>
 
 

@@ -8,9 +8,9 @@ module NvimConf
       ).write
     end
 
-    def plugins(name, bootstraped: false, &block)
+    def plugins(name, title: nil, bootstraped: false, &block)
       evaluate_for_manager(
-        Managers::Plugins.new(name, bootstraped: bootstraped),
+        Managers::Plugins.new(name, title, bootstraped: bootstraped),
         &block
       )
     end
@@ -22,9 +22,9 @@ module NvimConf
       )
     end
 
-    def settings(&block)
+    def settings(title = nil, &block)
       evaluate_for_manager(
-        Managers::Settings.new,
+        Managers::Settings.new(title),
         &block
       )
     end

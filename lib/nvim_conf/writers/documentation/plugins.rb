@@ -35,7 +35,7 @@ module NvimConf
               @io.write(
                 Utils::MarkdownFormatter.collapisible(
                   plugin.name,
-                  plugin.name
+                  plugin_url(plugin.name)
                 )
               )
               @io.write("\n")
@@ -43,6 +43,10 @@ module NvimConf
 
             @io.write_separator
           end
+        end
+
+        def plugin_url(name)
+          "https://github.com/#{name}"
         end
       end
     end

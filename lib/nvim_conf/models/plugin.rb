@@ -14,9 +14,10 @@ module NvimConf
       option :file_types, optional: true
       option :cmd, optional: true
       option :run, optional: true
+      option :requires, optional: true
 
       def self.optional_arguments
-        %i[as opt file_types branch run cmd]
+        %i[as opt file_types branch run cmd requires]
       end
     end
   end
