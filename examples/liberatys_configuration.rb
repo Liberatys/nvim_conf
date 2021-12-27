@@ -109,7 +109,7 @@ NvimConf::Core.define do
     set :synmaxcol, 200
     set :linebreak, false
     set :bg, :dark
-    set :mmp, 20000
+    set :mmp, 20_000
     set :expandtab, true
     set :shiftwidth, 2
     set :cursorline, true
@@ -143,28 +143,28 @@ NvimConf::Core.define do
     set :neoformat_basic_format_retab, true
     set :neoformat_basic_format_trim, true
 
-    [
-      :gzip,
-      :zip,
-      :zipPlugin,
-      :tar,
-      :tarPlugin,
-      :getscript,
-      :getscriptPlugin,
-      :vimball,
-      :vimballPlugin,
-      :'2html_plugin',
-      :matchit,
-      :matchparen,
-      :rrhelper,
-      :netrw,
-      :netrwPlugin,
-      :netrwSettings
+    %i[
+      gzip
+      zip
+      zipPlugin
+      tar
+      tarPlugin
+      getscript
+      getscriptPlugin
+      vimball
+      vimballPlugin
+      2html_plugin
+      matchit
+      matchparen
+      rrhelper
+      netrw
+      netrwPlugin
+      netrwSettings
     ].each do |builtin_setting|
       set "loaded_#{builtin_setting}", true
     end
 
-    # set :neoformat_enabled_ruby, ['rubocop'] -> Handle array values
+    set :neoformat_enabled_ruby, ["rubocop"]
   end
 
   mappings do
