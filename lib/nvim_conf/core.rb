@@ -15,6 +15,13 @@ module NvimConf
       )
     end
 
+    def commands(&block)
+      evaluate_for_manager(
+        Managers::Commands.new,
+        &block
+      )
+    end
+
     def requires(&block)
       evaluate_for_manager(
         Managers::Requires.new,

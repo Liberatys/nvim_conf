@@ -4,7 +4,7 @@ module NvimConf
       class Plugins
         def initialize(managers, io)
           @managers = managers
-          @io = Utils::IoOperator.new(io)
+          @io = io
         end
 
         def aggregate_writes

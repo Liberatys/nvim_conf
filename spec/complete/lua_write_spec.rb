@@ -31,6 +31,25 @@ RSpec.describe "Complete Write => Lua" do
         setup "testing"
       end
 
+      commands do
+        new(
+          "Creation",
+          body: <<~BODY
+            local lspkind = require "lspkind"
+            lspkind.init()
+          BODY
+        )
+
+        new(
+          "Update",
+          vim_exec: true,
+          body: <<~BODY
+            local lspkind = require "lspkind"
+            lspkind.init()
+          BODY
+        )
+      end
+
       mappings(:nmap) do
         m "<CTRL-c>", ":Git Blame"
         m "<CTRL-c>", ":Git Blame"
@@ -159,6 +178,22 @@ RSpec.describe "Complete Write => Lua" do
 
 
       -- ########################
+      -- #       Commands       #
+      -- ########################
+
+
+      local lspkind = require "lspkind"
+      lspkind.init()
+
+      vim.cmd([[
+        local lspkind = require "lspkind"
+        lspkind.init()
+      ]])
+
+
+
+
+      -- ########################
       -- #       Mappings       #
       -- ########################
 
@@ -176,7 +211,7 @@ RSpec.describe "Complete Write => Lua" do
       vim.o.nvim-linter = true
       vim.o.tester = true
       vim.o.plugins += "new"
-      vim.o.runners = ["rubocop", "rufo"]
+      vim.o.runners = {"rubocop", "rufo"}
 
 
 
