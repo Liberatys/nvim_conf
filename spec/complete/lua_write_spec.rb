@@ -99,6 +99,7 @@ RSpec.describe "Complete Write => Lua" do
 
       return require('packer').startup(function()
 
+        use 'wbthomason/packer.nvim'
         {use 'glacambre/firenvim', opt = true, run = 'cd folder'}
         {use 'glepnir/galaxyline.nvim', opt = true, branch = 'main'}
 

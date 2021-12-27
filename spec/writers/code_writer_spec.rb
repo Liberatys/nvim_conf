@@ -12,7 +12,6 @@ RSpec.describe NvimConf::Writers::Code::Orchestrator do
           end
 
           plugins(:packer, bootstraped: true) do
-            plug("wbthomason/packer.nvim")
             plug("andymass/vim-matchup")
           end
 

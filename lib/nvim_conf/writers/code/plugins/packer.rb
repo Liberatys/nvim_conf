@@ -1,3 +1,5 @@
+require "nvim_conf/models/plugin"
+
 module NvimConf
   module Writers
     module Code
@@ -29,7 +31,7 @@ module NvimConf
             @manager = manager
             @io = io
             @configuration = configuration
-            @plugins = manager.plugins
+            @plugins = install_self(manager.plugins)
           end
 
           def write
@@ -59,6 +61,10 @@ module NvimConf
             @io.write(
               BOOTSTRAP_HEADER
             )
+          end
+
+          def install_self(plugins)
+            [Models::Plugin.new("wbthomason/packer.nvim")] + plugins
           end
 
           def write_tail_of_bootstrap
