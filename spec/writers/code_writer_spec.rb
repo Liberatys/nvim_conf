@@ -25,7 +25,7 @@ RSpec.describe NvimConf::Writers::Code::Orchestrator do
 
       context "without leading comment" do
         it "writes the settings code to the IO device" do
-          io_device = StringIO.new
+          io_device = NvimConf::Utils::IoOperator.new(StringIO.new)
           described_class.new(
             NvimConf.managers,
             io_device
@@ -98,7 +98,7 @@ RSpec.describe NvimConf::Writers::Code::Orchestrator do
       end
 
       it "writes the settings code to the IO device" do
-        io_device = StringIO.new
+        io_device = NvimConf::Utils::IoOperator.new(StringIO.new)
         described_class.new(
           NvimConf.managers,
           io_device,

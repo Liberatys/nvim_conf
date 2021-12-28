@@ -18,15 +18,8 @@ module NvimConf
 
         def write
           @manager.relevant_groups.each do |group|
-            if group.render_title?
-              @io.write(
-                NvimConf::Commenter.comment_block(
-                  nil,
-                  "#{@manager.class.section_name} - #{group.section_title}",
-                  spacer: true
-                )
-              )
-            end
+            @io.write_group(@manager, group)
+
             group.children.each do |setting|
               @io.write(
                 [
