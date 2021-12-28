@@ -27,7 +27,9 @@ module NvimConf
         end
 
         def aggregate_writes
-          @managers.select { |manager| manager.class != NON_WRITABLE_MANAGER }.each_with_index do |manager, index|
+          @managers.reject do |manager|
+            manager.instance_of?(NON_WRITABLE_MANAGER)
+          end.each_with_index do |manager, index|
             @io.write(
               NvimConf::Commenter.comment_block(
                 @configuration,
@@ -36,11 +38,7 @@ module NvimConf
               )
             )
 
-            if index.positive? || @configuration[:commented]
-              @io.write(
-                separator
-              )
-            end
+            @io.write_separator if index.positive? || @configuration[:commented]
 
             aggregate_writes_for_manager(manager)
           end
@@ -56,10 +54,6 @@ module NvimConf
             manager.class.section_name,
             manager.title
           ].join(" - ")
-        end
-
-        def separator
-          "\n\n"
         end
 
         def aggregate_writes_for_manager(manager)
