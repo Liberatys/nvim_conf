@@ -9,7 +9,6 @@ Functions in a way that prevents having to rewrite everything in order to change
 
 ```markdown
   gem install nvim_conf
-  
   nvim_conf path_to_configuration_file
 ```
 
@@ -73,10 +72,13 @@ File: $HOME/.config/nvim/Init.md
 ```
 ## Why use NvimConf?
 
-Neovim is changing fast! Every other week we can use an new package manager.
-There is always a better version of your autocomplete plugin.
+### Abstraction
 
-## Ruby
+You no longer have to know about the exact syntax that vim and lua are handling calls to the api. One interface to configure them all.
+
+This allows you to change your configuration without having to worry about a future language to configure vim... because we can just add the needed generators for the new langauge and your old configuration is good to go.
+
+### Ruby
 
 Because the abstraction is written in ruby and the configuration is also just a ruby file you are able to execute
 any valid ruby code directly in your configuration. This allows you to introduce complex build tasks.
@@ -84,6 +86,7 @@ any valid ruby code directly in your configuration. This allows you to introduce
 An example:
 
 Input: 
+
 ```ruby
 [
   :gzip,
@@ -98,6 +101,7 @@ end
 ```
 
 Output:
+
 ```lua
 vim.g.loaded_gzip = true
 vim.g.loaded_zip = true
@@ -107,12 +111,15 @@ vim.g.loaded_tarPlugin = true
 vim.g.loaded_getscript = true
 ```
 
+Use environment variables, ruby helpers, modules and all the good that ruby has to offer.
+
 Why repeat yourself when you can script it?
 
 ### **The goals of NvimConf are**
-- Add automatic documentation to your configuration
-- Decouple the configuration from the actual code needed to arrive at the configuration state
-- Don't **version control** the configuration but manage the configuration schema
+
+- Automatic documentation to your configuration
+- Decoupling the configuration from the actual code needed to arrive at the configuration state
+- Version control of generation schema rather than actual configuration
 - No more file changes due to a change in package manager... just change the one line in your configuration generator
 - Provide reproducible configuration
 - Sharable and copiable configuration that allows everyone to configure their neovim
@@ -130,18 +137,17 @@ Why repeat yourself when you can script it?
 - Param Checker
   - Validate the settings parameters
   - Check generated settings for functionality
-- Custom embeeded Functions
 - Split Configuraton into multiple files
 - Render optimization by reducing the generation set
 - Comment your configuration automatically
 - Extend documentation generation
-  - Add plugin documentation
   - Options for styling / spacing
 - Meta information for your configuration
   - Version
   - Author-Name
   - Generation Date
   - Generation Architecture (Macos / Linux)
+- Utility to share and donwload configurations
 
 ## Examples
 
