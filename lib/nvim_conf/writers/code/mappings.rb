@@ -10,10 +10,10 @@ module NvimConf
           vim: Generators::Mappings::Code::Vim
         }
 
-        def initialize(manager, io, format: :lua, commented: false)
+        def initialize(manager, io, configuration)
           @manager = manager
           @io = io
-          @format = format
+          @configuration = configuration
         end
 
         def write
@@ -30,7 +30,7 @@ module NvimConf
         private
 
         def generator_class
-          MAPPING_GENERATOR_MAPPING[@format]
+          MAPPING_GENERATOR_MAPPING[@configuration[:format]]
         end
       end
     end

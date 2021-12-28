@@ -8,10 +8,10 @@ module NvimConf
           lua: Generators::Globals::Code::Lua
         }
 
-        def initialize(manager, io, format: :lua, commented: false)
+        def initialize(manager, io, configuration)
           @manager = manager
           @io = io
-          @format = format
+          @configuration = configuration
         end
 
         def write
@@ -28,7 +28,7 @@ module NvimConf
         private
 
         def generator_class
-          GLOBAL_GENERATOR_MAPPING[@format]
+          GLOBAL_GENERATOR_MAPPING[@configuration[:format]]
         end
       end
     end

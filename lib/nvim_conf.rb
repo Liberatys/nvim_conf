@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 require "nvim_conf/version"
+require "nvim_conf/writers/code/writer"
 require "nvim_conf/core"
 require "nvim_conf/manager"
 require "nvim_conf/writer"
