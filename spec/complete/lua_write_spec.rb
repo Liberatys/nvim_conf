@@ -114,7 +114,7 @@ RSpec.describe "Complete Write => Lua" do
       -- ########################
 
 
-      vim.api.nvim_set_keymap('n', '<CTRL-c>', ':Git Blame')
+      vim.api.nvim_set_keymap('n', '<CTRL-c>', ':Git Blame', {})
 
 
 
@@ -129,7 +129,7 @@ RSpec.describe "Complete Write => Lua" do
         packer_bootstrap = fn.system({'git', 'clone', '--depth', '1', 'https://github.com/wbthomason/packer.nvim', install_path})
       end
 
-      return require('packer').startup(function()
+      require('packer').startup(function(use)
 
         use 'wbthomason/packer.nvim'
         {use 'glacambre/firenvim', opt = true, run = 'cd folder'}
@@ -148,7 +148,7 @@ RSpec.describe "Complete Write => Lua" do
       -- ########################
 
 
-      return require('packer').startup(function()
+      require('packer').startup(function(use)
 
         use 'wbthomason/packer.nvim'
         {use 'glacambre/firenvim', opt = true, run = 'cd folder'}
@@ -198,8 +198,8 @@ RSpec.describe "Complete Write => Lua" do
       -- ########################
 
 
-      vim.api.nvim_set_keymap('n', '<CTRL-c>', ':Git Blame')
-      vim.api.nvim_set_keymap('n', '<CTRL-c>', ':Git Blame')
+      vim.api.nvim_set_keymap('n', '<CTRL-c>', ':Git Blame', {})
+      vim.api.nvim_set_keymap('n', '<CTRL-c>', ':Git Blame', {})
 
 
 
@@ -210,7 +210,7 @@ RSpec.describe "Complete Write => Lua" do
 
       vim.o.nvim-linter = true
       vim.o.tester = true
-      vim.o.plugins += "new"
+      vim.o.plugins:append("new")
       vim.o.runners = {"rubocop", "rufo"}
 
 

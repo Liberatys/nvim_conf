@@ -36,11 +36,12 @@ module NvimConf
         )
       end
 
-      def add(key, value)
+      def add(key, value, **params)
         store_setting(
           :add,
           key: key,
-          value: value
+          value: value,
+          **params
         )
       end
 

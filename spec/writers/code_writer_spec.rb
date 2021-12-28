@@ -45,7 +45,7 @@ RSpec.describe NvimConf::Writers::Code::Orchestrator do
               packer_bootstrap = fn.system({'git', 'clone', '--depth', '1', 'https://github.com/wbthomason/packer.nvim', install_path})
             end
 
-            return require('packer').startup(function()
+            require('packer').startup(function(use)
 
               use 'wbthomason/packer.nvim'
               use 'andymass/vim-matchup'
@@ -57,9 +57,9 @@ RSpec.describe NvimConf::Writers::Code::Orchestrator do
             end)
 
 
-            vim.api.nvim_set_keymap('', '<CTRL-c>', ':MarkdownPreview<CR>')
-            vim.api.nvim_set_keymap('n', '<CTRL-c>', ':MarkdownPreview<CR>')
-            vim.api.nvim_set_keymap('i', '<CTRL-c>', ':MarkdownPreview<CR>')
+            vim.api.nvim_set_keymap('', '<CTRL-c>', ':MarkdownPreview<CR>', {})
+            vim.api.nvim_set_keymap('n', '<CTRL-c>', ':MarkdownPreview<CR>', {})
+            vim.api.nvim_set_keymap('i', '<CTRL-c>', ':MarkdownPreview<CR>', {})
           RESULT
 
           expect(

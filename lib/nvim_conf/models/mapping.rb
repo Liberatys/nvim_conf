@@ -8,6 +8,7 @@ module NvimConf
       param :operator
       param :binding
       param :action
+      option :remove, default: -> { false }
     end
   end
 end

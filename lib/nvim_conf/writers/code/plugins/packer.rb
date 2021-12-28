@@ -20,7 +20,7 @@ module NvimConf
           BOOTSTRAP_TAIL
 
           BLOCK_START = <<~START
-            return require('packer').startup(function()\n
+            require('packer').startup(function(use)\n
           START
 
           BLOCK_END = <<~END

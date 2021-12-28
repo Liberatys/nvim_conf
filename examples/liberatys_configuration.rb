@@ -1,3 +1,5 @@
+require "pathname"
+
 NvimConf::Core.define do
   configuration do
     output_folder "~/.config/nvim"
@@ -5,6 +7,27 @@ NvimConf::Core.define do
     documented true
     write true
     commented
+  end
+
+  commands do
+    new(
+      "Unset space",
+      body: "vim.api.nvim_set_keymap('', '<Space>', '<Nop>', { noremap = true, silent = true })"
+    )
+  end
+
+  commands do
+    new(
+      "External Commands",
+      vim_exec: true,
+      body: <<~COMMAND_BODY
+        function! ExternalCommandResult()
+          return system(input('Command: '))[:-2]
+        endfunction
+
+        iabbrev <silent> dsf <C-R>=strftime("%d.%m.%Y")<CR>
+      COMMAND_BODY
+    )
   end
 
   plugins(:packer, bootstraped: true) do
@@ -21,7 +44,6 @@ NvimConf::Core.define do
     # Completion
     plug "hrsh7th/nvim-cmp"
     plug "hrsh7th/cmp-buffer"
-    # plug 'tzachar/cmp-tabnine', run: './install.sh', requires: 'hrsh7th/nvim-cmp' -> Look into issue with install
     plug "hrsh7th/cmp-path"
     plug "hrsh7th/cmp-nvim-lua"
     plug "hrsh7th/cmp-nvim-lsp"
@@ -108,7 +130,7 @@ NvimConf::Core.define do
     set :timeoutlen, 100
     set :synmaxcol, 200
     set :linebreak, false
-    set :bg, :dark
+    set :bg, "dark"
     set :mmp, 20_000
     set :expandtab, true
     set :shiftwidth, 2
@@ -118,6 +140,32 @@ NvimConf::Core.define do
     set :number, true
     set :smartcase, true
     set :pumheight, 0
+
+    %w[
+      iwhite
+      algorithm:patience
+      indent-heuristic
+    ].each do |opt_addition|
+      add :diffopt, opt_addition, scope: :opt
+    end
+
+    add :clipboard, "unnamedplus", scope: :opt
+
+    %w[
+      *.o,*.obj,*~
+      *.git*
+      *sass-cache*
+      *logs*
+      *node_modules*
+      **/node_modules/**
+      *DS_Store*
+      *.gem
+      log/**
+      tmp/**
+      *.png,*.jpg,*.gif
+    ].each do |wildignore_option|
+      add :wildignore, wildignore_option, scope: :opt
+    end
 
     # Splits
     set :splitright, true
@@ -135,13 +183,24 @@ NvimConf::Core.define do
 
     # Shell
     set :shell, "/bin/zsh"
-    set :undodir, "~/.vimdid"
+    set :undodir, Pathname.new("~/.vimdid").expand_path.to_s
+  end
+
+  commands do
+    new(
+      "Init gruvbox",
+      body: "colorscheme gruvbox",
+      vim_exec: true
+    )
   end
 
   globals do
+    set :mapleader, " "
     set :neoformat_basic_format_align, true
     set :neoformat_basic_format_retab, true
     set :neoformat_basic_format_trim, true
+
+    set :ri_no_mappings, true
 
     %i[
       gzip
@@ -168,8 +227,46 @@ NvimConf::Core.define do
   end
 
   mappings do
+    map "<c-c>", "<ESC>"
+    map "jk", "<ESC>"
+    nmap ";", ":"
+    vmap ";", ":"
+
+    # Disable arrow keys
+    map "<UP>", "<ESC>"
+    map "<DOWN>", "<ESC>"
+    map "<LEFT>", "<ESC>"
+    map "<RIGTH>", "<ESC>"
+
+    # tmap '<ESC>', '<C-\><C-n>'
+    # nmap '<leader>ni', ':e $NOTE_INDEX/index.md<CR>:cd $NOTE_INDEX<CR>'
+
+    map "<Leader>rk", ":call ri#LookupNameUnderCursor()<CR>"
   end
 
-  mappings(:nmap) do
+  mappings do
+    map "F", "^"
+    map "T", "$"
+
+    map "n", "nzz"
+    map "N", "Nzz"
+    map "*", "*zz"
+    map "#", "#zz"
+    map "g#", "g*zz"
+
+    vmap "<TAB>", ">gv"
+    vmap "<S-TAB>", "<gv"
+
+    nmap "<S-k>", "mz:m-2<cr>`z"
+    nmap "<S-j>", "mz:m+<cr>`z"
+    vmap "<S-j>", ":m'>+<cr>`<my`>mzgv`yo`z"
+    vmap "<S-k>", ":m'<-2<cr>`>my`<mzgv`yo`z"
+  end
+
+  mappings do
+    nmap "<C-J>", "<C-W><C-J>"
+    nmap "<C-K>", "<C-W><C-K>"
+    nmap "<C-H>", "<C-W><C-H>"
+    nmap "<c-s>", ":w<CR>"
   end
 end
