@@ -45,22 +45,9 @@ module NvimConf
           end
 
           def format_value(value)
-            case value
-            when String
-              [
-                '"',
-                value,
-                '"'
-              ].join
-            when Array
-              [
-                "{",
-                value.map { |inner_value| format_value(inner_value) }.join(", "),
-                "}"
-              ].join
-            else
-              fallback_to_truthy_on_nil(value)
-            end
+            NvimConf::Utils::Escaper.escape_value(
+              value
+            ) || fallback_to_truthy_on_nil(value)
           end
 
           def fallback_to_truthy_on_nil(value)

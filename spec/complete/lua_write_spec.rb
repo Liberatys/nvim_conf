@@ -212,7 +212,7 @@ RSpec.describe "Complete Write => Lua" do
       -- ########################
 
 
-      vim.o.runners = {"rubocop", "rufo"}
+      vim.o.runners = {'rubocop', 'rufo'}
       
 
 
@@ -227,7 +227,7 @@ RSpec.describe "Complete Write => Lua" do
       -- ########################
       -- # Settings - Different #
       -- ########################
-      vim.o.plugins:append("new")
+      vim.o.plugins:append('new')
 
 
 

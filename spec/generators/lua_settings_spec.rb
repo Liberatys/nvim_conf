@@ -29,7 +29,7 @@ RSpec.describe NvimConf::Generators::Settings::Code::Lua do
       it "generates code to set setting and persists the given format" do
         expect(
           described_class.new(setting).generate
-        ).to eq("vim.o.#{setting.key} = \"#{setting.value}\"")
+        ).to eq("vim.o.#{setting.key} = '#{setting.value}'")
       end
     end
   end

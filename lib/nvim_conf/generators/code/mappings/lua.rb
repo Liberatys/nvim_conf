@@ -64,16 +64,9 @@ module NvimConf
           end
 
           def escape_value(value)
-            escape_character = surround_symbol(value)
-            [
-              escape_character,
-              value,
-              escape_character
-            ].join
-          end
-
-          def surround_symbol(value)
-            value.include?("'") ? '"' : "'"
+            NvimConf::Utils::Escaper.escape_string(
+              value
+            )
           end
 
           def options
