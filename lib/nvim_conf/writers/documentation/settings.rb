@@ -56,7 +56,7 @@ module NvimConf
         end
 
         def all_settings
-          @managers.map(&:settings).flatten
+          @managers.map(&:all_children).flatten
         end
       end
     end

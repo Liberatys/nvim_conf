@@ -2,9 +2,11 @@
 
 require "nvim_conf/version"
 require "nvim_conf/core"
+require "nvim_conf/manager"
 require "nvim_conf/writer"
 require "nvim_conf/commenter"
 require "nvim_conf/configuration_builder"
+require "nvim_conf/models/group"
 require "nvim_conf/managers/plugins"
 require "nvim_conf/managers/settings"
 require "nvim_conf/managers/mappings"

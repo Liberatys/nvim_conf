@@ -17,7 +17,7 @@ module NvimConf
         end
 
         def write
-          @manager.settings.each do |setting|
+          @manager.all_children.each do |setting|
             @io.write(
               [
                 generator_class.new(setting).generate,

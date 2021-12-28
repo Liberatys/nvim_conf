@@ -66,6 +66,7 @@ NvimConf::Core.define do
     plug "neovim/nvim-lspconfig"
     plug "ray-x/lsp_signature.nvim"
     plug "williamboman/nvim-lsp-installer"
+    plug "svermeulen/vimpeccable"
     plug "onsails/lspkind-nvim"
 
     # Navigation
@@ -292,7 +293,8 @@ NvimConf::Core.define do
       lsp: "Init LSP",
       tab_configuration: "Init Tab Configuration",
       telescope: "Init Telescope",
-      treesitter: "Init Treesitter"
+      treesitter: "Init Treesitter",
+      keybindings: "Init keybindings"
     }.each do |key, label|
       path = "#{__dir__}/configuration_parts/init_#{key}.lua"
       new(
