@@ -2,13 +2,7 @@ require "nvim_conf/models/command"
 
 module NvimConf
   module Managers
-    class Commands
-      attr_reader :commands
-
-      def initialize
-        @commands = []
-      end
-
+    class Commands < Manager
       class << self
         def section_name
           "Commands"
@@ -25,13 +19,11 @@ module NvimConf
       private
 
       def store_command(name, description, body, vim_exec)
-        @commands << Models::Command.new(
-          name, description, body, vim_exec: vim_exec
+        new_child(
+          Models::Command.new(
+            name, description, body, vim_exec: vim_exec
+          )
         )
-      end
-
-      def store?
-        @commands.any?
       end
     end
   end

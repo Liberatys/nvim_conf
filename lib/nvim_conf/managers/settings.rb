@@ -2,16 +2,12 @@ require "nvim_conf/models/setting"
 
 module NvimConf
   module Managers
-    class Settings
-      attr_reader :settings, :title
+    class Settings < Manager
+      attr_reader :title
 
       def initialize(title)
+        super()
         @title = title
-        @settings = []
-      end
-
-      def store?
-        @settings.any?
       end
 
       class << self
@@ -48,11 +44,9 @@ module NvimConf
       private
 
       def store_setting(operation, key:, value: nil, scope: :global)
-        @settings << build_setting(operation, key, value, scope)
-      end
-
-      def build_setting(operation, key, value, scope)
-        Models::Setting.new(operation, key, value, scope)
+        new_child(
+          Models::Setting.new(operation, key, value, scope)
+        )
       end
     end
   end

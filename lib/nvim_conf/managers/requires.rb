@@ -1,14 +1,9 @@
 require "nvim_conf/models/require"
 
-# TODO: Refactor error messages
 module NvimConf
   module Managers
-    class Requires
+    class Requires < Manager
       attr_reader :requires
-
-      def initialize
-        @requires = []
-      end
 
       class << self
         def section_name
@@ -22,12 +17,10 @@ module NvimConf
 
       private
 
-      def store?
-        @requires.any?
-      end
-
       def store_require(file)
-        @requires << Models::Require.new(file)
+        new_child(
+          Models::Require.new(file)
+        )
       end
     end
   end

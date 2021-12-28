@@ -1,34 +1,9 @@
-require "nvim_conf/generators/code/globals/lua"
-
 module NvimConf
   module Writers
     module Code
-      class GlobalsWriter
-        GLOBAL_GENERATOR_MAPPING = {
-          lua: Generators::Globals::Code::Lua
-        }
-
-        def initialize(manager, io, format: :lua, commented: false)
-          @manager = manager
-          @io = io
-          @format = format
-        end
-
-        def write
-          @manager.globals.each do |global|
-            @io.write(
-              [
-                generator_class.new(global).generate,
-                "\n"
-              ].join
-            )
-          end
-        end
-
-        private
-
+      class GlobalsWriter < BaseWriter
         def generator_class
-          GLOBAL_GENERATOR_MAPPING[@format]
+          NvimConf::CODE_WRITER_CONFIGURATION.dig(:globals, @configuration[:format])
         end
       end
     end

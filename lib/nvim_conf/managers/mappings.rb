@@ -3,15 +3,15 @@ require "nvim_conf/models/mapping"
 # TODO: Refactor error messages
 module NvimConf
   module Managers
-    class Mappings
+    class Mappings < Manager
       AVAILABLE_METHODS = %w[map map! nmap vmap imap cmap smap xmap omap lmap tmap]
       attr_reader :mappings
 
       def initialize(namespace)
-        @mappings = []
         @namespace = namespace&.to_s
 
         validate!
+        super()
       end
 
       class << self
@@ -24,10 +24,6 @@ module NvimConf
         return if @namespace.nil? || @namespace.empty?
 
         raise "Invalid namespace given for <mappings>: #{@namespace}" unless AVAILABLE_METHODS.include?(@namespace)
-      end
-
-      def store?
-        @mappings.any?
       end
 
       AVAILABLE_METHODS.each do |operator|
@@ -60,13 +56,9 @@ module NvimConf
       private
 
       def store_mapping(operator, binding, action, **params)
-        @mappings << build_mapping(
-          operator, binding, action, params
+        new_child(
+          Models::Mapping.new(operator, binding, action, **params)
         )
-      end
-
-      def build_mapping(operator, binding, action, params)
-        Models::Mapping.new(operator, binding, action, **params)
       end
     end
   end

@@ -63,9 +63,7 @@ module NvimConf
         end
 
         def aggregate_writes_for_manager(manager)
-          WRITER_CONFIGURATION[manager.class]&.new(
-            manager, @io, **@configuration.slice(:format, :commented)
-          )&.write
+          WRITER_CONFIGURATION[manager.class]&.new(manager, @io, @configuration)&.write
         end
 
         def default_configuration
