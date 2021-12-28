@@ -21,7 +21,7 @@ RSpec.describe NvimConf::Generators::Mappings::Code::Lua do
             described_class.new(
               mapping
             ).generate
-          ).to eq("vim.api.nvim_set_keymap('#{shorthand}', '<Ctrl-g>', ':Git Blame')")
+          ).to eq("vim.api.nvim_set_keymap('#{shorthand}', '<Ctrl-g>', ':Git Blame', {})")
         end
       end
     end

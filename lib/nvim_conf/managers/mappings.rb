@@ -4,7 +4,7 @@ require "nvim_conf/models/mapping"
 module NvimConf
   module Managers
     class Mappings
-      AVAILABLE_METHODS = %w[map map! nmap vmap imap cmap smap xmap omap lmap]
+      AVAILABLE_METHODS = %w[map map! nmap vmap imap cmap smap xmap omap lmap tmap]
       attr_reader :mappings
 
       def initialize(namespace)
@@ -38,6 +38,14 @@ module NvimConf
         end
       end
 
+      AVAILABLE_METHODS.each do |operator|
+        define_method("r#{operator}") do |binding|
+          store_mapping(
+            operator, binding, nil, remove: true
+          )
+        end
+      end
+
       def new(binding, action)
         raise "No namespace was given for <mappings>" unless @namespace
         raise "No namespace was given for <mappings>" if @namespace.empty?
@@ -51,14 +59,14 @@ module NvimConf
 
       private
 
-      def store_mapping(operator, binding, action)
+      def store_mapping(operator, binding, action, **params)
         @mappings << build_mapping(
-          operator, binding, action
+          operator, binding, action, params
         )
       end
 
-      def build_mapping(operator, binding, action)
-        Models::Mapping.new(operator, binding, action)
+      def build_mapping(operator, binding, action, params)
+        Models::Mapping.new(operator, binding, action, **params)
       end
     end
   end

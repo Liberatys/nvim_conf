@@ -7,7 +7,8 @@ module NvimConf
 
           SETTING_NAMESPACES = {
             global: "o",
-            buffer: "bo"
+            buffer: "bo",
+            opt: "opt"
           }
 
           def initialize(setting)
@@ -15,16 +16,24 @@ module NvimConf
           end
 
           def generate
-            [
-              call_signature,
-              format_value(@setting.value)
-            ].join(operator)
+            if %i[set unset].include?(@setting.operation)
+              generate_set
+            else
+              generate_addition
+            end
           end
 
           private
 
-          def operator
-            %i[set unset].include?(@setting.operation) ? " = " : " += "
+          def generate_addition
+            "#{call_signature}:append(#{format_value(@setting.value)})"
+          end
+
+          def generate_set
+            [
+              call_signature,
+              format_value(@setting.value)
+            ].join(" = ")
           end
 
           def call_signature
