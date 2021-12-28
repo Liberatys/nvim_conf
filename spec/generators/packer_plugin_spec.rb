@@ -25,7 +25,7 @@ RSpec.describe NvimConf::Generators::Plugins::Code::Packer do
         )
       end
 
-      it { is_expected.to eq("{use 'wbthomason/packer.nvim', opt = true}") }
+      it { is_expected.to eq("use {'wbthomason/packer.nvim', opt = true}") }
     end
 
     context "when has run argument" do
@@ -36,7 +36,7 @@ RSpec.describe NvimConf::Generators::Plugins::Code::Packer do
         )
       end
 
-      it { is_expected.to eq("{use 'wbthomason/packer.nvim', run = 'cd app && yarn install'}") }
+      it { is_expected.to eq("use {'wbthomason/packer.nvim', run = 'cd app && yarn install'}") }
     end
 
     context "when has run and opt argument" do
@@ -48,7 +48,7 @@ RSpec.describe NvimConf::Generators::Plugins::Code::Packer do
         )
       end
 
-      it { is_expected.to eq("{use 'wbthomason/packer.nvim', opt = true, run = 'cd app && yarn install'}") }
+      it { is_expected.to eq("use {'wbthomason/packer.nvim', opt = true, run = 'cd app && yarn install'}") }
     end
   end
 end

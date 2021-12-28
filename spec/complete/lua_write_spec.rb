@@ -132,8 +132,8 @@ RSpec.describe "Complete Write => Lua" do
       require('packer').startup(function(use)
 
         use 'wbthomason/packer.nvim'
-        {use 'glacambre/firenvim', opt = true, run = 'cd folder'}
-        {use 'glepnir/galaxyline.nvim', opt = true, branch = 'main'}
+        use {'glacambre/firenvim', opt = true, run = 'cd folder'}
+        use {'glepnir/galaxyline.nvim', opt = true, branch = 'main'}
 
         if packer_bootstrap then
           require('packer').sync()
@@ -151,7 +151,7 @@ RSpec.describe "Complete Write => Lua" do
       require('packer').startup(function(use)
 
         use 'wbthomason/packer.nvim'
-        {use 'glacambre/firenvim', opt = true, run = 'cd folder'}
+        use {'glacambre/firenvim', opt = true, run = 'cd folder'}
       end)
 
 
@@ -173,7 +173,7 @@ RSpec.describe "Complete Write => Lua" do
       -- ########################
 
 
-      require 'testing'.setup{}
+      require('testing').setup{}
 
 
 

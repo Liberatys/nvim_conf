@@ -14,7 +14,7 @@ module NvimConf
           private
 
           def build_statement
-            "require '#{@require.file}'.setup{}"
+            "require('#{@require.file}').setup{}"
           end
         end
       end

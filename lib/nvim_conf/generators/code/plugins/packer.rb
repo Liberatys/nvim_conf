@@ -14,12 +14,12 @@ module NvimConf
           end
 
           def generate
-            generated_call = [
-              COMMAND_PREFIX,
-              command_call
-            ].join(" ")
+            call_arguments = command_call
 
-            args? ? "{#{generated_call}}" : generated_call
+            [
+              COMMAND_PREFIX,
+              args? ? "{#{call_arguments}}" : call_arguments
+            ].join(" ")
           end
 
           private
