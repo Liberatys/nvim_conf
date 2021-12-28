@@ -35,8 +35,8 @@ RSpec.describe "DSL => Mappings" do
           end
         end
         expect(NvimConf.managers.length).to eq(2)
-        expect(NvimConf.managers.first.mappings.map(&:operator)).to eq(%w[nmap nmap])
-        expect(NvimConf.managers.last.mappings.map(&:operator)).to eq(%w[vmap vmap])
+        expect(NvimConf.managers.first.all_children.map(&:operator)).to eq(%w[nmap nmap])
+        expect(NvimConf.managers.last.all_children.map(&:operator)).to eq(%w[vmap vmap])
       end
     end
   end

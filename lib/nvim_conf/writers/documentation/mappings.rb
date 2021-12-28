@@ -45,7 +45,7 @@ module NvimConf
         end
 
         def all_mappings
-          @managers.map(&:mappings).flatten
+          @managers.map(&:all_children).flatten
         end
       end
     end
