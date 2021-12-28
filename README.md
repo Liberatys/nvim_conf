@@ -46,7 +46,7 @@ end
 ```lua
 File: $HOME/.config/nvim/init.lua
 
-return require('packer').startup(function()
+require('packer').startup(function()
   use "tpope/vim-fugitive"
   use "tpope/vim-surround"
 end)
