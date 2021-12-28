@@ -14,9 +14,7 @@ NvimConf::Core.define do
       "Unset space",
       body: "vim.api.nvim_set_keymap('', '<Space>', '<Nop>', { noremap = true, silent = true })"
     )
-  end
 
-  commands do
     new(
       "External Commands",
       vim_exec: true,
