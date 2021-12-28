@@ -61,7 +61,9 @@ RSpec.describe "Complete Write => Lua" do
           set "tester"
         end
 
-        add "plugins", "new"
+        group("Master", label: "Different") do
+          add "plugins", "new"
+        end
 
         set :runners, %w[rubocop rufo]
       end
@@ -210,7 +212,6 @@ RSpec.describe "Complete Write => Lua" do
       -- ########################
 
 
-      vim.o.plugins:append("new")
       vim.o.runners = {"rubocop", "rufo"}
       
 
@@ -220,6 +221,13 @@ RSpec.describe "Complete Write => Lua" do
       -- ########################
       vim.o.nvim-linter = true
       vim.o.tester = true
+
+
+
+      -- ########################
+      -- # Settings - Different #
+      -- ########################
+      vim.o.plugins:append("new")
 
 
 
