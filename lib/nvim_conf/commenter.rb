@@ -16,6 +16,8 @@ module NvimConf
       end
 
       def skip?(configuration)
+        return false if configuration.nil?
+
         configuration[:format] != :lua || !configuration[:commented]
       end
     end

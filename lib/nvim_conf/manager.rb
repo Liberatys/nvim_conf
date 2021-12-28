@@ -12,7 +12,11 @@ module NvimConf
     def group(name, label: nil, &block)
       new_group(name, label)
 
-      instance_eval(&block)
+      begin
+        instance_eval(&block)
+      ensure
+        @current_group = nil
+      end
     end
 
     def all_children

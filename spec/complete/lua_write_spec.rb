@@ -56,8 +56,10 @@ RSpec.describe "Complete Write => Lua" do
       end
 
       settings "General" do
-        set "nvim-linter"
-        set "tester"
+        group("Main") do
+          set "nvim-linter"
+          set "tester"
+        end
 
         add "plugins", "new"
 
@@ -208,10 +210,16 @@ RSpec.describe "Complete Write => Lua" do
       -- ########################
 
 
-      vim.o.nvim-linter = true
-      vim.o.tester = true
       vim.o.plugins:append("new")
       vim.o.runners = {"rubocop", "rufo"}
+      
+
+
+      -- ########################
+      -- #   Settings - Main    #
+      -- ########################
+      vim.o.nvim-linter = true
+      vim.o.tester = true
 
 
 
@@ -235,9 +243,9 @@ RSpec.describe "Complete Write => Lua" do
       ### Set
 
       - tabstop => true
+      - runners => rubocop, rufo
       - nvim-linter => true
       - tester => true
-      - runners => rubocop, rufo
 
 
       ### Add

@@ -17,13 +17,24 @@ module NvimConf
         end
 
         def write
-          @manager.all_children.each do |setting|
-            @io.write(
-              [
-                generator_class.new(setting).generate,
-                "\n"
-              ].join
-            )
+          @manager.relevant_groups.each do |group|
+            if group.render_title?
+              @io.write(
+                NvimConf::Commenter.comment_block(
+                  nil,
+                  "#{@manager.class.section_name} - #{group.section_title}",
+                  spacer: true
+                )
+              )
+            end
+            group.children.each do |setting|
+              @io.write(
+                [
+                  generator_class.new(setting).generate,
+                  "\n"
+                ].join
+              )
+            end
           end
         end
 
