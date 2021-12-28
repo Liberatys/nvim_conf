@@ -2,13 +2,7 @@ require "nvim_conf/models/global"
 
 module NvimConf
   module Managers
-    class Globals
-      attr_reader :globals
-
-      def initialize
-        @globals = []
-      end
-
+    class Globals < Manager
       def set(name, value = true)
         store_global(
           name,
@@ -22,10 +16,6 @@ module NvimConf
         end
       end
 
-      def store?
-        @globals.any?
-      end
-
       def unset(name)
         store_global(
           name,
@@ -36,9 +26,11 @@ module NvimConf
       private
 
       def store_global(name, value)
-        @globals << Models::Global.new(
-          name,
-          value
+        new_child(
+          Models::Global.new(
+            name,
+            value
+          )
         )
       end
     end

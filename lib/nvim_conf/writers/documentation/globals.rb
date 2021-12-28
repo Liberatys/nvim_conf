@@ -23,7 +23,7 @@ module NvimConf
         private
 
         def write_globals
-          @managers.map(&:globals).flatten.each do |global|
+          @managers.map(&:all_children).flatten.each do |global|
             @io.write(
               [
                 "- #{global.name}",
