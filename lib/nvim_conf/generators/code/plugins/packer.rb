@@ -41,15 +41,9 @@ module NvimConf
 
               [
                 COMMAND_ALIAS[argument] || argument,
-                escape_value(@plugin.send(argument))
+                NvimConf::Utils::Escaper.escape_value(@plugin.send(argument)) || @plugin.send(argument)
               ].join(" = ")
             end.compact
-          end
-
-          def escape_value(value)
-            return value unless value.is_a?(String)
-
-            "'#{value}'"
           end
 
           def args?

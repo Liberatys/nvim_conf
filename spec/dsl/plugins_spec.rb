@@ -19,8 +19,8 @@ RSpec.describe "DSL => Plugins" do
           end
         end
         expect(NvimConf.managers.length).to eq(1)
-        expect(NvimConf.managers.first.plugins.length).to eq(2)
-        expect(NvimConf.managers.first.plugins.map(&:name)).to eq(%w[nvim-linter tester])
+        expect(NvimConf.managers.first.all_children.length).to eq(2)
+        expect(NvimConf.managers.first.all_children.map(&:name)).to eq(%w[nvim-linter tester])
       end
     end
 
@@ -33,8 +33,8 @@ RSpec.describe "DSL => Plugins" do
           end
         end
         expect(NvimConf.managers.length).to eq(1)
-        expect(NvimConf.managers.first.plugins.length).to eq(2)
-        expect(NvimConf.managers.first.plugins.map(&:name)).to eq(%w[nvim-linter tester])
+        expect(NvimConf.managers.first.all_children.length).to eq(2)
+        expect(NvimConf.managers.first.all_children.map(&:name)).to eq(%w[nvim-linter tester])
       end
     end
   end

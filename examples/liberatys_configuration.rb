@@ -128,19 +128,9 @@ NvimConf::Core.define do
     plug "nvim-treesitter/nvim-treesitter-textobjects"
     plug "windwp/nvim-spectre"
 
-    # Testing
-    plug "vim-test/vim-test"
-    plug "kassio/neoterm"
-
     # Tabline / Statusline
     plug "folke/trouble.nvim"
     plug "tamton-aquib/staline.nvim"
-
-    # Formating
-    plug "sbdchd/neoformat"
-
-    # Linting
-    plug "mfussenegger/nvim-lint"
 
     # UI
     plug "morhetz/gruvbox"
@@ -155,8 +145,9 @@ NvimConf::Core.define do
     set :tabstop, 2
     set :colorcolumn, "120"
     set :relativenumber, true
-    set :showcmd, true
     set :encoding, "utf-8"
+    set :showcmd, true
+    set :autowrite
     set :updatetime, 300
     set :timeoutlen, 100
     set :synmaxcol, 200

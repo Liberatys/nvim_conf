@@ -31,7 +31,7 @@ module NvimConf
             @manager = manager
             @io = io
             @configuration = configuration
-            @plugins = install_self(manager.plugins)
+            @plugins = install_self(manager.all_children)
           end
 
           def write

@@ -31,7 +31,7 @@ module NvimConf
               )
             )
 
-            manager.plugins.each do |plugin|
+            manager.all_children.each do |plugin|
               @io.write(
                 Utils::MarkdownFormatter.collapisible(
                   plugin.name,

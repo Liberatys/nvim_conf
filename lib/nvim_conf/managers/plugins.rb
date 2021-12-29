@@ -1,25 +1,21 @@
-require "nvim_conf/models/plugin"
+require 'nvim_conf/models/plugin'
 
 module NvimConf
   module Managers
-    class Plugins
-      attr_reader :plugins, :name, :title, :bootstraped
+    class Plugins < Manager
+      attr_reader :name, :title, :bootstraped
 
       def initialize(name, title, bootstraped: false)
+        super()
         @name = name
         @title = title
         @bootstraped = bootstraped
-        @plugins = []
       end
 
       class << self
         def section_name
-          "Plugins"
+          'Plugins'
         end
-      end
-
-      def store?
-        @plugins.any?
       end
 
       def plug(name, **params)
@@ -32,15 +28,11 @@ module NvimConf
       private
 
       def store_plugin(name, params)
-        @plugins << build_plugin(
-          name, params
-        )
-      end
-
-      def build_plugin(name, params)
-        Models::Plugin.new(
-          name,
-          **params
+        new_child(
+          Models::Plugin.new(
+            name,
+            **params
+          )
         )
       end
     end
