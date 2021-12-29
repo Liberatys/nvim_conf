@@ -1,4 +1,4 @@
-require 'nvim_conf/models/plugin'
+require "nvim_conf/models/plugin"
 
 module NvimConf
   module Managers
@@ -14,7 +14,7 @@ module NvimConf
 
       class << self
         def section_name
-          'Plugins'
+          "Plugins"
         end
       end
 
