@@ -23,6 +23,11 @@ NvimConf::Core.define do
       plug "neovim/nvim-lspconfig"
       plug "lewis6991/impatient.nvim"
       plug "farmergreg/vim-lastplace"
+      plug "danchoi/ri.vim"
+    end
+
+    group "Management" do
+      plug "ahmedkhalf/project.nvim"
     end
 
     group "Linting" do
@@ -61,7 +66,7 @@ NvimConf::Core.define do
     end
 
     group "Development" do
-      plug "folke/lua-dev.nvim"
+      plug "folke/lua-dev.nvim", file_types: "lua"
       plug "is0n/jaq-nvim"
       plug "numToStr/Comment.nvim"
       plug "folke/todo-comments.nvim"
@@ -162,7 +167,7 @@ NvimConf::Core.define do
       set :encoding, "utf-8"
       set :splitright
       set :splitbelow
-      set :cmdheight, 2
+      set :cmdheight, 1
       set :cmdwinheight, 5
       set :wildmenu
       add :wildignore, ".git,.hg,.svn,*.pyc,*.o,*.out,*.jpg,*.jpeg,*.png,*.gif", scope: :opt
@@ -226,6 +231,10 @@ NvimConf::Core.define do
   end
 
   commands do
+    new(
+      "Setup projects",
+      body: "require('telescope').load_extension('projects')"
+    )
   end
 
   mappings do
@@ -244,7 +253,12 @@ NvimConf::Core.define do
 
     group "Testing" do
       map "<leader>t", ":UltestNearest<CR>"
+      map "<leader>to", ":UltestOutput<CR>"
       map "<leader>T", ":UltestSummary<CR>"
+    end
+
+    group "Utility" do
+      map "<leader>q", ":Trouble<CR>"
     end
 
     group "Telescope" do
@@ -265,6 +279,7 @@ NvimConf::Core.define do
         map mapping, ":lua require('telescope.builtin').#{method}()<CR>"
       end
 
+      map "<leader>p", ":Telescope projects<CR>"
       map "<leader>S", ":lua require('spectre').open()<CR>"
       map "<leader>sp", ":lua require('spectre').open_file_search()<CR>"
     end
@@ -296,6 +311,7 @@ NvimConf::Core.define do
 
     group "Splits" do
       map "vv", "<C-W>v"
+      map "ss", "<C-W>s"
 
       nmap "<C-J>", "<C-W><C-J>"
       nmap "<C-K>", "<C-W><C-K>"
@@ -307,6 +323,10 @@ NvimConf::Core.define do
   requires do
     group "Formating" do
       setup "formatter"
+    end
+
+    group "Mangement" do
+      setup "project_nvim"
     end
 
     group "UI" do
