@@ -287,16 +287,20 @@ NvimConf::Core.define do
       vmap "<S-j>", ":m'>+<cr>`<my`>mzgv`yo`z"
       vmap "<S-k>", ":m'<-2<cr>`>my`<mzgv`yo`z"
 
-      nmap "<C-J>", "<C-W><C-J>"
-      nmap "<C-K>", "<C-W><C-K>"
-      nmap "<C-H>", "<C-W><C-H>"
-      nmap "<c-s>", ":w<CR>"
-
       map "<leader>cd", ":cd %:p:h<CR>:pwd<CR>"
 
       map "<leader>bp", ":bp<CR>"
       map "<leader>bn", ":bn<CR>"
       map "<leader>nh", ":noh<CR>"
+    end
+
+    group "Splits" do
+      map "vv", "<C-W>v"
+
+      nmap "<C-J>", "<C-W><C-J>"
+      nmap "<C-K>", "<C-W><C-K>"
+      nmap "<C-H>", "<C-W><C-H>"
+      nmap "<c-s>", ":w<CR>"
     end
   end
 
