@@ -63,6 +63,7 @@ NvimConf::Core.define do
 
     group "Documentation" do
       plug "davidgranstrom/nvim-markdown-preview"
+      plug "nvim-neorg/neorg"
     end
 
     group "Development" do
@@ -118,6 +119,25 @@ NvimConf::Core.define do
       )
     end
 
+    group "Telescope" do
+      new(
+        "Setup telescope",
+        body: <<~START
+          local actions = require("telescope.actions")
+
+          require("telescope").setup({
+              defaults = {
+                  mappings = {
+                      i = {
+                          ["<esc>"] = actions.close,
+                      },
+                  },
+              },
+          })
+        START
+      )
+    end
+
     group "Completion" do
       new(
         "Setup autostart for completion",
@@ -133,6 +153,21 @@ NvimConf::Core.define do
       new(
         "Setup theme",
         body: "vim.cmd[[colorscheme tokyonight]]"
+      )
+    end
+
+    group "Documentation" do
+      new(
+        "Setup neoorg",
+        body: <<~START
+          require('neorg').setup {
+              -- Tell Neorg what modules to load
+              load = {
+                  ["core.defaults"] = {},
+                  ["core.norg.concealer"] = {}
+              },
+          }
+        START
       )
     end
   end
