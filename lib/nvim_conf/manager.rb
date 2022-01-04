@@ -1,6 +1,6 @@
 module NvimConf
   class Manager
-    NO_GROUP_DEFAULT_NAME = "No Group"
+    NO_GROUP_DEFAULT_NAME = 'No Group'
 
     attr_reader :groups
 
