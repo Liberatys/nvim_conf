@@ -4,9 +4,9 @@ module NvimConf
       class << self
         SYMBOLD_CONFIGURATION = {
           array: {
-            start: '{',
-            end: '}',
-            separator: ', '
+            start: "{",
+            end: "}",
+            separator: ", "
           }
         }
 
@@ -35,8 +35,8 @@ module NvimConf
         end
 
         def contains_value_in_need_of_escape(input)
-          return true if input.include?('\'')
-          return true if input.include?('\\')
+          return true if input.include?("'")
+          return true if input.include?("\\")
 
           false
         end
