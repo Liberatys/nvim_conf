@@ -23,7 +23,9 @@ NvimConf::Core.define do
       plug "gelguy/wilder.nvim", run: ":UpdateRemotePlugins"
       plug "neovim/nvim-lspconfig"
       plug "lewis6991/impatient.nvim"
+      plug "nvim-telescope/telescope-fzf-native.nvim", run: "make"
       plug "farmergreg/vim-lastplace"
+      plug "chiedo/vim-case-convert"
       plug "danchoi/ri.vim"
       plug "s1n7ax/nvim-terminal"
     end
@@ -75,10 +77,13 @@ NvimConf::Core.define do
       plug "folke/todo-comments.nvim"
       plug "folke/trouble.nvim"
       plug "windwp/nvim-spectre"
+      plug "mfussenegger/nvim-dap"
+      plug "rcarriga/nvim-dap-ui"
+      plug "theHamsta/nvim-dap-virtual-text"
     end
 
     group "Development - Languages" do
-      plug "ray-x/go.nvim", file_types: "go"
+      plug "ray-x/go.nvim"
       plug "vim-ruby/vim-ruby", file_types: "ruby"
       plug "rust-lang/rust.vim", file_types: "rust"
       plug "elixir-editors/vim-elixir", file_types: "elixir"
@@ -129,6 +134,10 @@ NvimConf::Core.define do
               },
           })
         START
+      )
+      new(
+        "fzf",
+        body: "require('telescope').load_extension('fzf')"
       )
     end
 
@@ -399,6 +408,7 @@ NvimConf::Core.define do
       setup "nvim-terminal"
       setup "todo-comments"
       setup "trouble"
+      setup "go"
     end
 
     group "Utility" do
