@@ -9,6 +9,7 @@ module NvimConf
             separator: ", "
           }
         }
+
         def escape_value(value)
           return value if value.nil?
 
@@ -30,13 +31,14 @@ module NvimConf
         def escape_string(value)
           return value unless value.is_a?(String)
 
-          string_wrapper = value.include?("\'") ? "\"" : "\'"
+          value.dump
+        end
 
-          [
-            string_wrapper,
-            value,
-            string_wrapper
-          ].join
+        def contains_value_in_need_of_escape(input)
+          return true if input.include?("'")
+          return true if input.include?("\\")
+
+          false
         end
       end
     end

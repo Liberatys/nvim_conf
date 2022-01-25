@@ -20,10 +20,14 @@ NvimConf::Core.define do
     group "Tools" do
       plug "kyazdani42/nvim-web-devicons"
       plug "nvim-lua/plenary.nvim"
+      plug "gelguy/wilder.nvim", run: ":UpdateRemotePlugins"
       plug "neovim/nvim-lspconfig"
       plug "lewis6991/impatient.nvim"
+      plug "nvim-telescope/telescope-fzf-native.nvim", run: "make"
       plug "farmergreg/vim-lastplace"
+      plug "chiedo/vim-case-convert"
       plug "danchoi/ri.vim"
+      plug "s1n7ax/nvim-terminal"
     end
 
     group "Management" do
@@ -73,10 +77,13 @@ NvimConf::Core.define do
       plug "folke/todo-comments.nvim"
       plug "folke/trouble.nvim"
       plug "windwp/nvim-spectre"
+      plug "mfussenegger/nvim-dap"
+      plug "rcarriga/nvim-dap-ui"
+      plug "theHamsta/nvim-dap-virtual-text"
     end
 
     group "Development - Languages" do
-      plug "ray-x/go.nvim", file_types: "go"
+      plug "ray-x/go.nvim"
       plug "vim-ruby/vim-ruby", file_types: "ruby"
       plug "rust-lang/rust.vim", file_types: "rust"
       plug "elixir-editors/vim-elixir", file_types: "elixir"
@@ -111,14 +118,6 @@ NvimConf::Core.define do
   end
 
   commands do
-    group "Linting" do
-      new(
-        "Setup lint on save",
-        body: "au BufWritePost <buffer> lua require('lint').try_lint()",
-        vim_exec: true
-      )
-    end
-
     group "Telescope" do
       new(
         "Setup telescope",
@@ -136,6 +135,10 @@ NvimConf::Core.define do
           })
         START
       )
+      new(
+        "fzf",
+        body: "require('telescope').load_extension('fzf')"
+      )
     end
 
     group "Completion" do
@@ -146,6 +149,18 @@ NvimConf::Core.define do
             auto_start = 'shut-up',
           }
         START
+      )
+
+      new(
+        "Setup wilder",
+        body: "call wilder#setup({'modes': [':', '/', '?']})",
+        vim_exec: true
+      )
+
+      new(
+        "Setup wilder popup",
+        body: "call wilder#set_option('renderer', wilder#popupmenu_renderer({ 'highlighter': wilder#basic_highlighter()}))",
+        vim_exec: true
       )
     end
 
@@ -178,6 +193,8 @@ NvimConf::Core.define do
       set :updatetime, 500
       set :swapfile, false
       set :cursorline
+      set :undodir, Pathname.new("~/.vimdid").expand_path.to_s
+      set :undofile
     end
 
     group "Editing" do
@@ -267,6 +284,12 @@ NvimConf::Core.define do
 
   commands do
     new(
+      "Setup linter",
+      body: "au BufWritePost <buffer> lua require('lint').try_lint()",
+      vim_exec: true
+    )
+
+    new(
       "Setup projects",
       body: "require('telescope').load_extension('projects')"
     )
@@ -294,11 +317,11 @@ NvimConf::Core.define do
 
     group "Utility" do
       map "<leader>q", ":Trouble<CR>"
+      map "<leader>;", ":lua terminal:toggle()<cr>"
     end
 
     group "Telescope" do
       {
-        "<leader><leader>" => :find_files,
         "<C-f>" => :git_files,
         "<C-m>" => :treesitter,
         "<C-q>" => :live_grep,
@@ -314,9 +337,15 @@ NvimConf::Core.define do
         map mapping, ":lua require('telescope.builtin').#{method}()<CR>"
       end
 
-      map "<leader>p", ":Telescope projects<CR>"
+      map "<leader>F", ":Format<CR>"
       map "<leader>S", ":lua require('spectre').open()<CR>"
+      map "<leader>ff", ":vim.lsp.buf.formatting()<CR>"
+      map "<leader>p", ":Telescope projects<CR>"
       map "<leader>sp", ":lua require('spectre').open_file_search()<CR>"
+    end
+
+    group "Terminal" do
+      tmap "<Esc>", '<C-\\><C-n>'
     end
 
     group "Navigation" do
@@ -332,8 +361,6 @@ NvimConf::Core.define do
       vmap "<TAB>", ">gc"
       vmap "<S-TAB>", "<gc"
 
-      map "<S-k>", "mz:m-2<cr>`z"
-      map "<S-j>", "mz:m+<cr>`z"
       vmap "<S-j>", ":m'>+<cr>`<my`>mzgv`yo`z"
       vmap "<S-k>", ":m'<-2<cr>`>my`<mzgv`yo`z"
 
@@ -378,8 +405,10 @@ NvimConf::Core.define do
     group "Development" do
       setup "jaq-nvim"
       setup "Comment"
+      setup "nvim-terminal"
       setup "todo-comments"
       setup "trouble"
+      setup "go"
     end
 
     group "Utility" do
@@ -391,6 +420,91 @@ NvimConf::Core.define do
     group "Navigation" do
       setup "marks"
       setup "navigator"
+    end
+  end
+
+  commands do
+    group("Formating") do
+      new(
+        "Setup formatter - Lua",
+        body: <<~START
+          require('formatter').setup({
+              filetype = {
+                lua = {
+                    -- luafmt
+                    function()
+                      return {
+                        exe = "luafmt",
+                        args = {"--indent-count", 2, "--stdin"},
+                        stdin = true
+                      }
+                    end
+                },
+              }
+            })
+        START
+      )
+
+      new(
+        "Setup formatter - clang",
+        body: <<~START
+          require('formatter').setup({
+              filetype = {
+                cpp = {
+                    -- clang-format
+                   function()
+                      return {
+                        exe = "clang-format",
+                        args = {"--assume-filename", vim.api.nvim_buf_get_name(0)},
+                        stdin = true,
+                        cwd = vim.fn.expand('%:p:h')  -- Run clang-format in cwd of the file.
+                      }
+                    end
+                },
+              }
+            })
+        START
+      )
+
+      new(
+        "Setup formatter - rust",
+        body: <<~START
+          require('formatter').setup({
+            filetype = {
+              rust = {
+                -- Rustfmt
+                function()
+                  return {
+                    exe = "rustfmt",
+                    args = {"--emit=stdout"},
+                    stdin = true
+                  }
+                end
+              },
+            }
+          })
+        START
+      )
+
+      new(
+        "Setup formatter - ruby",
+        body: <<~START
+          require('formatter').setup({
+            filetype = {
+              ruby = {
+                 -- rubocop
+                 function()
+                   return {
+                     exe = "rubocop", -- might prepend `bundle exec `
+                     args = { '--auto-correct', '--stdin', '%:p', '2>/dev/null', '|', "awk 'f; /^====================$/{f=1}'"},
+                     stdin = true,
+                   }
+                 end
+               }
+            }
+          })
+        START
+      )
     end
   end
 end
